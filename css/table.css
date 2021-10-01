@@ -1,0 +1,37 @@
+/* css for ordered product */
+.section{
+    width: 100%;
+    padding:30px;
+    border: 5px solid red;
+}
+
+table{
+   width: 100%;
+}
+ table,th,td{
+   
+
+   border-collapse: collapse;
+   padding: 7px;
+   margin: auto;
+   text-align: left;
+   
+}
+th{
+   background-color: #12dfcb;
+   font-size: 20px;
+
+}
+ .section a{
+   text-decoration: none;
+   font-weight: bold;
+   padding: 6px 15px;
+   background-color: red;
+   border: none;
+   border-radius: 5px;
+   color:white;
+
+}
+ .section a:hover{
+   background-color: rgb(141, 55, 55);
+}

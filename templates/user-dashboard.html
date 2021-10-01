@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user-dashboard</title>
+
+    <link rel="stylesheet" type="image/icon" href="">
+		<link rel="stylesheet" href="user-dashboard.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="heading">
+                <h1>Supply Chain Management</h1>
+            </div>
+            <div class="link">
+                <a href="">Transaction History</a>
+                <a href="">Carts</a>
+                <a href="">Ordered Product</a>
+            </div>
+            <div class="search">
+                <form method="post">
+                    <input type="search"  name="product" id="product">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div class="log-out">
+                <a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i></a>
+                <p id="logout"></p>
+            </div>
+        </div>
+        <div class="section">
+            <div class="left-part">
+                <div class="menu">
+                    <i class="fas fa-bars" id="menu"></i>
+                </div>
+                
+                <center>
+                    <img src="https://www.tcetmumbai.in/image/tcetshieldlogo.jpg">
+                    <p>
+                        Neeraj Kumar Yadav
+                    </p>
+                    <p>9565439966</p>
+
+                </center>
+                <ul>
+                    <li>
+                        <i class="fas fa-user-circle"></i>
+                        <span>Profile</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Address</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-globe-europe"></i>
+                        <span>Language</span>
+                    </li>
+                   
+                </ul>
+            </div>
+            
+            <div class="right-part">
+                <h1>Ram opal Verma</h1>
+                <div class="product">
+                    <h1>Ram Gopal Verma</h1>
+                </div>
+
+            </div>
+        </div>
+     
+
+    </div>
+    <script src="form.js"></script>
+</body>
+</html>

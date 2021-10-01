@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordered Product</title>
+
+    <link rel="stylesheet" type="image/icon" href="">
+    <link rel="stylesheet" href="user-dashboard.css">
+		<link rel="stylesheet" href="table.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="heading">
+                <h1>Supply Chain Management</h1>
+            </div>
+            <div class="link">
+                <a href="http://localhost:3000/user-dashboard">Home</a>
+               
+                
+            </div>
+          
+            <div class="log-out">
+                <a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+        <div class="section">
+           
+            
+ 
+               
+                          <table>
+                              <tr>
+
+                                  <th>Product Name</th>
+                                  <th>Price</th>
+                                  <th>Quantity</th>
+                                  <th>Amount</th>
+                                  <th>Date of order</th>
+                                  <th>Delivery Status</th>
+                                  <th>Operation</th>
+                              </tr>
+                              <% for(let i=0;i<ordered_product.length;i++){
+                                  %>
+                              <tr>
+                                <td><%=ordered_product[i]['product']%></td>
+                                <td><%=ordered_product[i]['price']%></td>
+                                <td><%=ordered_product[i]['quantity']%></td>
+                                <td><%=ordered_product[i]['amount']%></td>
+                                <td><%=ordered_product[i]['date']%></td>
+                                <td><%=ordered_product[i]['status']%></td>
+                                <td><a href="">Cancel</a></td>
+                            </tr>
+                            <%}%>
+                          </table>
+                      </div>
+         
+
+     
+
+    </div>
+</body>
+</html>

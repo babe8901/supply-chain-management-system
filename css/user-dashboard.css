@@ -1,0 +1,254 @@
+*{
+	margin:0px;
+	padding:0px;
+	box-sizing:border-box;
+	font-family:Garamond;
+}
+.container{
+	height:100%;
+	width:100%;
+	
+	
+	overflow: hidden;
+}
+.container .header{
+	width:100%;
+	height: 80px;
+    
+	display:flex;
+	background-color: #546e88;
+	
+	opacity: 0.8;
+	position:fixed
+}
+.container .header .heading{
+	width:30%;
+	
+	
+	text-align:center;
+	padding:14px 0px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.container .header .heading h1{
+	color: white;
+}
+.container .header .link{
+	width:30%;
+	
+	display:flex;
+	align-items:center;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+}
+.container .header .link a{
+	margin-right: 20px;
+	text-decoration: none;
+	color: white;
+	
+	font-size: 20px;
+	padding: 2px 5px;
+    outline:none;
+	padding: 5px 10px;
+	border-radius: 15px;
+	transition: 0.5s;
+	transition-property: color;
+}
+.container .header .link a:hover{
+    color:rgb(221, 186, 186);
+	text-decoration: underline;
+ 
+}
+.container .header .link a:focus{
+	background-color: pink;
+}
+.container .header .search{
+	width:30%;
+
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	
+}
+.container .header .search input{
+	height:40px;
+	width: 240px;
+	margin-right: 8px;
+	border-radius: 10px;
+	padding-left: 20px;
+	outline: none;
+	border:blue;
+	background-color: #f1f3f5;
+	transition: 0.2s;
+	transition-property: box-shadow;
+}
+.container .header .search input:focus{
+	box-shadow: inset 2px -1px 7px #12dfcb;
+}
+.container .header .search button{
+	height: 40px;
+	width: 90px;
+	margin-right: 20px;
+	border-radius: 10px;
+	border: blue;
+	font-size: 17px;
+	font-weight: bold;
+    
+    transition: 0.5s;
+	transition-property: background-color;
+}
+.container .header .search button:hover{
+	background-color: blue;
+}
+.log-out{
+	display: flex;
+	
+	width: 5%;
+	justify-content: flex-end;
+	align-items: center;
+	
+	
+}
+.log-out a{
+	
+	font-size: 40px;
+	color: white;
+	border-radius: 7px;
+	transition: 0.4s;
+	transition-property: background-color;
+}
+.log-out a:hover{
+	color:rgb(212, 194, 194);
+}
+.section{
+	width:100%;
+	
+	margin-top: 80px;
+	
+	float: left;
+	
+	
+	display: flex;
+}
+.section .left-part{
+	width: 20%;
+	
+
+	background-color: #404449;
+	height: 100vh;
+	
+}
+.section .left-part #menu{
+	color: white;
+	margin:20px 20px;
+	font-size: 30px;
+	
+}
+.section .left-part #menu:hover{
+	cursor: pointer;
+	color: blanchedalmond;
+}
+.section .left-part img{
+	margin-top: 10px;
+	width: 150px;
+	height: 150px;
+	border-radius: 150px;
+}
+.section .left-part p{
+	margin-top: 12px;
+	color: white;
+	font-size: 18px;
+}
+
+
+.section .left-part li{
+	padding: 13px 20px;
+	
+	color: white;
+	transition: 0.5s;
+	transition-property: background-color;
+	text-decoration: none;
+	padding: 10px;
+}
+.section .left-part li:hover{
+	background-color: blue;
+	cursor: pointer;
+}
+.section .left-part li i{
+	font-size: 30px;
+	width: 40px;
+	height: 40px;
+	
+}
+.section .left-part a{
+	color: white;
+	text-decoration: none;
+}
+.section .left-part li span{
+	font-size: 25px;
+
+	margin-left: 2px;
+	
+}
+.section .right-part{
+
+	width: 80%;
+	height: 100%;
+	padding:20px;
+    display: flex;
+	flex-direction: column;
+	
+	
+
+}
+.category{
+	width: 100%;
+	height: 100%;
+	
+	display: flex;
+	overflow-x: auto;
+}
+.section .right-part .product{
+    width: 100%;
+	margin: 0px 3px;
+    height: 300px;
+	background-color: rgb(236, 230, 230);
+
+}
+.product-img{
+	width: 100%;
+    height: 50%;
+	
+}
+.product-img img{
+	width: 100%;
+	height: 100%;
+}
+.product-detail{
+	width: 100%;
+	height: 50%;
+	overflow-y: auto;
+	padding:5px;
+	
+}
+.product-detail .operation{
+	width: 180px;
+	height: 40px;
+	padding: 10px 0px;
+	
+}
+.operation a{
+	text-decoration: none;
+	
+	padding:5px;
+	border-radius: 8px;
+	background-color: blue;
+	color: white;
+	margin:0px 2px;
+	
+
+}
+.operation a:hover{
+	background-color: rgb(39, 39, 201);
+}

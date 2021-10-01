@@ -1,0 +1,122 @@
+*{
+	margin:0px;
+	padding:0px;
+	box-sizing:border-box;
+	font-family:Garamond;
+}
+.container{
+	width:100%;
+	
+	
+}
+.container #login,#register{
+	
+	display:inline-block;
+	margin:15px 20px;
+	text-decoration:none;
+	background-color:blue;
+	padding:7px 20px;
+	border-radius:17px;
+	font-size:20px;
+	color:white;
+}
+.container #login:hover{
+	background-color:red;
+}
+.container #login:focus{
+	background-color:pink;
+}
+.container #register:hover{
+	background-color:red;
+}
+.container #register:focus{
+	background-color:pink;
+}
+.center{
+	
+	width:500px;
+	margin:100px auto;
+	box-shadow: inset 1px -5px 6px #132456;
+}
+.center i{
+	position:relative;
+	
+	float:right;
+	top:20px;
+	padding:7px 15px;
+	cursor:pointer;
+}
+.center h1{
+	text-align:center;
+	margin:20px 0px;
+	
+	clear:right;
+}
+.center .form{
+	
+	padding:10px 20px;
+}
+.center .form label{
+	display:block;
+	
+	padding:5px 0px;
+	margin-top:5px;
+	font-size:20px;
+}
+.center .form input{
+	display:block;
+	
+	width:100%;
+	
+	padding:10px 10px;
+	border-radius:3px;
+	border:none;
+	outline:none;
+	box-shadow: inset 2px -3px 8px #123456;
+}
+.center .form select{
+	display:block;
+	padding:10px 15px;
+	border-radius:3px;
+	border:none;
+	outline:none;
+	margin-top:5px;
+	float:left;
+	
+	width:49%;
+	box-shadow: inset 2px -3px 8px #123456;
+}
+#gender{
+	float:right;
+}
+.center .form button{
+	
+	margin-top:8px;
+	padding:10px 20px;
+	border:none;
+	outline:none;
+	background:blue;
+	
+	font-size:20px;
+	font-weight:550;
+	border-radius:17px;
+	
+}
+.center .form button:hover{
+	background-color:white;
+	border:1px solid blue;
+}
+.center .form button:focus{
+	background-color:pink;
+}
+.center .form p{
+	margin:5px 0px;
+	
+	
+}
+.form a{
+	text-decoration:none;
+}
+.form a:hover{
+	font-size:20px;
+}
