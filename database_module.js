@@ -71,3 +71,19 @@ const ordered_product=new mongoose.Schema({
 
 const orderedModel=mongoose.model("ordered_product",ordered_product)
 module.exports.orderedModel=orderedModel
+
+//Create schema for feedback
+const feedback = new mongoose.Schema({
+    "f_name" : String,
+    "l_name" : String,
+    "area_code" : String,
+    "tel_num" : Number,
+    "email" : String,
+    "may_we_contact" : String,
+    "how_to_contact" : String,
+    "feedback" : String,
+    "datetime" : {type : Date, default : Date.now}
+}, {collection : "feedback"})
+
+const feedbackModel = mongoose.model("feedback", feedback)
+module.exports.feedbackModel = feedbackModel

@@ -117,7 +117,43 @@ app.post("/register",(req,res)=>{
    
 })
 
+//----------------------------------------------------------ROUTE FOR REGISTER------------------------------------------------------------
 
+app.route("/new-register")
+.get(sessionChecker,(req,res)=>{
+    res.sendFile(path.join(__dirname,"/templates/new-register.html"))
+})
+app.post("/new-register",(req,res)=>{
+    try{
+        password=req.body.password;
+        var hash_password=bcrypt.hashSync(password,10)
+        username=req.body.email
+        const user=new userModel({
+            name:req.body.name,
+            mobile:req.body.mobile,
+            email:req.body.email,
+            password:hash_password,
+            utype:req.body.utype,
+            gender:req.body.gender,
+            address:req.body.address
+        })
+        user.save((err,docs)=>{
+            if(err){
+                res.redirect("/register")
+            }
+            else{
+                console.log(docs)
+                req.session.user=docs;
+                res.redirect("/user-dashboard")
+            }
+        });
+       
+    }
+    catch(error){
+        console.log(error)
+    }
+   
+})
 
 //----------------------------------------------------------ROUTE FOR USER LOGIN------------------------------------------------------------
 app
@@ -153,6 +189,39 @@ app
     }
   });
 
+//----------------------------------------------------------ROUTE FOR USER LOGIN------------------------------------------------------------
+app
+  .route("/new-login")
+  .get(sessionChecker, (req, res) => {
+    res.sendFile(path.join(__dirname + "/templates/new-login.html"));
+  })
+  .post(async (req, res) => {
+    username = req.body.email;
+    var password = req.body.password;
+
+    console.log(username,password)
+      try {
+        user = await userModel.findOne({ email: username }).exec();
+        console.log(user,"login")
+        
+        // if(!user) {
+        //     console.log("account not matched from database..")
+        //     res.redirect("/login");
+        // }
+        if(user["email"]==username && bcrypt.compareSync(password, user["password"]))
+        {
+            req.session.user = user;
+            res.redirect("/user-dashboard");
+        }
+        else{
+            console.log("email and password are not matching..")
+            res.redirect("/login")
+        }
+        
+    } catch (error) {
+      console.log(error)
+    }
+  });
 
 
 //----------------------------------------------------------ROUTE FOR USER'S DASHBOARD------------------------------------------------------------
@@ -171,8 +240,12 @@ app.get("/user-dashboard", async(req, res) => {
       res.redirect("/login");
     }
   });
-  
 
+//----------------------------------------------------------ROUTE FOR ADMIN'S DASHBOARD------------------------------------------------------------
+app.get("/admin-dashboard", async(req, res) => {
+	// console.log(user, "user-dashboard login")
+	res.sendFile(path.join(__dirname,"/templates/admin.html"))
+});
 
 //----------------------------------------------------------ROUTE FOR LOGOUT------------------------------------------------------------
 app.get("/logout", (req, res) => {
@@ -398,6 +471,17 @@ app.get("/ordered_product",async(req,res)=>{
    catch(err){
      cconsole.log(err)
    }
+})
+
+app.route("/feedback",async(req, res) => {
+	res.sendFile(path.join(__dirname, "templates/feedback.html"))
+}).post(async (req, res) => {
+	var fname = req.body.firstname,
+	lname = req.body.lastname,
+	areacode = req.body.areacode,
+	telnum = req.body.telnum,
+	email = req.body.email,
+	may_we_contact = req.body.approve
 })
 
 
