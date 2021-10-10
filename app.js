@@ -18,6 +18,7 @@ const transactionModel=require("./database_module").transactionModel;
 const orderedModel=require("./database_module.js").orderedModel;
 const accountModel=require("./database_module.js").accountModel;
 const cartModel=require("./database_module.js").cartModel;
+const feedbackModel = require("./database_module.js").feedbackModel;
 
 
 
@@ -94,51 +95,13 @@ app.get("/", sessionChecker, (req, res) => {
     res.sendFile(path.join(__dirname,"/templates/home.html"))
   });
 
+//----------------------------------------------------------ROUTE FOR NEW REGISTER------------------------------------------------------------
 
-//----------------------------------------------------------ROUTE FOR REGISTER------------------------------------------------------------
 app.route("/register")
 .get(sessionChecker,(req,res)=>{
     res.sendFile(path.join(__dirname,"/templates/register.html"))
 })
 app.post("/register",(req,res)=>{
-    try{
-        password=req.body.password;
-        var hash_password=bcrypt.hashSync(password,10)
-        username=req.body.email
-        const user=new userModel({
-            name:req.body.name,
-            mobile:req.body.mobile,
-            email:req.body.email,
-            password:hash_password,
-            utype:req.body.utype,
-            gender:req.body.gender,
-            address:req.body.address
-        })
-        user.save((err,docs)=>{
-            if(err){
-                res.redirect("/register")
-            }
-            else{
-                console.log(docs)
-                req.session.user=docs;
-                res.redirect("/user-dashboard")
-            }
-        });
-       
-    }
-    catch(error){
-        console.log(error)
-    }
-   
-})
-
-//----------------------------------------------------------ROUTE FOR REGISTER------------------------------------------------------------
-
-app.route("/new-register")
-.get(sessionChecker,(req,res)=>{
-    res.sendFile(path.join(__dirname,"/templates/new-register.html"))
-})
-app.post("/new-register",(req,res)=>{
     try{
         password=req.body.password;
         var hash_password=bcrypt.hashSync(password,10)
@@ -204,41 +167,37 @@ app
     }
   });
 
-//----------------------------------------------------------ROUTE FOR USER LOGIN------------------------------------------------------------
+
 app
-  .route("/new-login")
-  .get(sessionChecker, (req, res) => {
-    res.sendFile(path.join(__dirname + "/templates/new-login.html"));
-  })
-  .post(async (req, res) => {
-    username = req.body.email;
-    var password = req.body.password;
+	.get("/contactus", sessionChecker, (req, res) => {
+    res.sendFile(path.join(__dirname,"/templates/contactus.html"))
+    })
+	
+app.post("/contactus" ,(req, res) => {
+	try {
+		const feedback=new feedbackModel({
+			f_name : req.body.firstname,
+			l_name : req.body.lastname,
+			area_code : req.body.areacode,
+			tel_num : req.body.telnum,
+			email : req.body.emailid,
+			may_we_contact : req.body.may_we_contact,
+			how_to_contact: req.body.contact_mode,
+			feedback : req.body.feedback
+		})
+		feedback.save((err, docs) => {
+			if(err) {
+				res.redirect("/feedback")
+			} else {
+				console.log(docs)
+				res.redirect("/")
+			}
+		})
 
-    console.log(username,password)
-      try {
-        user = await userModel.findOne({ email: username }).exec();
-        console.log(user,"login")
-        
-        // if(!user) {
-        //     console.log("account not matched from database..")
-        //     res.redirect("/login");
-        // }
-        if(user["email"]==username && bcrypt.compareSync(password, user["password"]))
-        {
-            req.session.user = user;
-            res.redirect("/user-dashboard");
-        }
-        else{
-            console.log("email and password are not matching..")
-            res.redirect("/login")
-        }
-        
-    } catch (error) {
-      console.log(error)
-    }
-  });
-
-
+	} catch(error) {
+		console.log(error)
+	}
+});
 //----------------------------------------------------------ROUTE FOR USER'S DASHBOARD------------------------------------------------------------
 app.get("/user-dashboard", async(req, res) => {
     //console.log(user,"user-dashboard login")
@@ -642,18 +601,6 @@ app.get("/ordered_product",async(req,res)=>{
      cconsole.log(err)
    }
 })
-
-app.route("/feedback",async(req, res) => {
-	res.sendFile(path.join(__dirname, "templates/feedback.html"))
-}).post(async (req, res) => {
-	var fname = req.body.firstname,
-	lname = req.body.lastname,
-	areacode = req.body.areacode,
-	telnum = req.body.telnum,
-	email = req.body.email,
-	may_we_contact = req.body.approve
-})
-
 
   // route for handling 404 requests(unavailable routes)
 app.use(function (req, res, next) {
