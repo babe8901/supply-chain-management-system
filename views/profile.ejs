@@ -4,102 +4,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user-dashboard</title>
-
-    <link rel="stylesheet" type="image/icon" href="">
-		<link rel="stylesheet" href="user-dashboard.css">
-        <link rel="stylesheet" href="profile.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ">
-    <style>
-        .bold{
-            font-weight: bold;
-        }
-    </style>
-    </head>
+    <title>Slide Bar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel = "icon" href = 
+"../image/bd7da51c-5529-4aeb-8df4-a441cebc5abc.jpg" 
+        type = "image/x-icon">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
 <body>
-    <%=user%>
-    <div class="container">
-        <div class="header">
-            <div class="heading">
-                <h1>Supply Chain Management</h1>
-            </div>
-            <div class="link">
-                <a href="">Home</a>
-                <a href="">Carts</a>
-               
-            </div>
-            <div class="search">
-                <form method="post">
-                    <input type="search"  name="product" id="product">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
-            <div class="log-out">
-                <a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i></a>
-            </div>
-        </div>
-        <div class="section">
-            <div class="left-part">
-                <div class="menu">
-                    <i class="fas fa-bars" id="menu"></i>
+
+        
+        <div class="container">
+            
+            <header class="header">
+                <div class="navbar">
+                    <div class="logo">
+                        <h1>e-<span>Shopping </span>
+             
+                    </div>
+                    <div class="search">
+                          <form>
+                              <input type="text"  id="search" name="search" placeholeder="search new product"><span><button id="search-btn"  type="submit">Search</button></span>
+                          </form>
+                    </div>
                 </div>
                 
+                <i class="fas fa-bars" id="bar"></i>
+                <i class="fas fa-window-close"  id="cancel"></i>
+            </header>
+        <div class="home">
+            <div class="slider">
+
                 <center>
-                    <img src="https://www.tcetmumbai.in/image/tcetshieldlogo.jpg">
-                    <<p>
-                        <%= user["name"]%>
-                    </p>
-                    <p><%= user["mobile"]%></p>
                     
+                    <img src="download.jpg" alt="">
+                    <p> <%=user['name']%></p>
+                    <p> <%=user['mobile']%></p>
+                </center> 
+                <ul id="ul">
                     
-                    
-                </center>
-                <ul>
-                    <li>
-                        <a href="http://localhost:3000/profile?username=<%=user['email']%>"><i class="fas fa-user-circle"></i>
-                        <span>Profile</span></a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:3000/transaction_history"><i class="fas fa-history"></i>
-                            <span>Transaction History</span></a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:3000/carts"><i class="fas fa-cart-plus"></i>
-                            <span>Carts</span></a>
-                    </li>
-                      <li>
-                        <a href="http://localhost:3000/ordered_product"><i class="fab fa-product-hunt"></i>
-                            <span>Ordered Product</span></a>
-                    </li>
-                   
+                    <li><a href="http://localhost:3000/profile?username=<%=user['email']%>"><i class="fas fa-users"></i>Profile</a></li>
+                    <li><a href="http://localhost:3000/transaction_history"><i class="fas fa-history"></i>Transaction Histroy</a></li>
+                    <li><a href="http://localhost:3000/carts"><i class="fas fa-cart-plus"></i>Carts</a></li>
+                    <li><a href="http://localhost:3000/ordered_product"><i class="fab fa-product-hunt"></i>Ordred Product</a></li>
+               
+                    <li id="logout"><a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i>logout</a></li>
                 </ul>
-            </div>
-            
-            
-           
-                      
-                 <div class="profile">
-                      <div class="profile-left">
-                           <img src="https://mycredible.info/home/assests/img/secure.png" alt="profile image">
-                      </div>
-                      <div class="profile-right">
-                           <h2><%=user["name"]%></h2>
-                           <p><span class="bold">Contact No:</span><%=user["mobile"]%></p>
-                           <p><span class="bold">Email Id:</span><%=user["email"]%></p>
-                           <p><span class="bold">User Type:</span><%=user["utype"]%></p>
-                           <p> <span class="bold">Gender:</span><%=user["gender"]%></p>
-                           </p><span class="bold">Address:</span><%=user["address"]%></p>
-                           <a href="http://localhost:3000/edit-profile?email=<%=user['email']%>">Edit Profile</a>
-                      </div>
-              
+              </div>
+              <div class="content">
+                <div class="second" >
+                    <img src="https://mycredible.info/home/assests/img/secure.png" alt="profile image">
+               </div>
+                  <div class="first" id="first" >
+                     
+                    <h1><%=user["name"]%></h1>
+                    <p><span class="bold">Contact No:</span><%=user["mobile"]%></p>
+                    <p><span class="bold">Email Id:</span><%=user["email"]%></p>
+                    <p><span class="bold">User Type:</span><%=user["utype"]%></p>
+                    <p> <span class="bold">Gender:</span><%=user["gender"]%></p>
+                    </p><span class="bold">Address:</span><%=user["address"]%></p>
+                       <a href="http://localhost:3000/edit-profile?email=<%=user['email']%>">Edit profile</a>
+                  </div>
+                  
                 
-                
-                 
-
-            </div>
-        </div>
-     
-
-    </div>
+              </div>
+             
+              </div>
+</div>
+             
+    <script src="interact.js"></script>
 </body>
 </html>

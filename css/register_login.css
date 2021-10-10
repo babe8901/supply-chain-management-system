@@ -48,7 +48,7 @@
 }
 .center h1{
 	text-align:center;
-	margin:20px 0px;
+	margin:40px 0px;
 	
 	clear:right;
 }
@@ -60,8 +60,28 @@
 	display:block;
 	
 	padding:5px 0px;
-	margin-top:5px;
+	margin:10px 0px;
 	font-size:20px;
+
+}
+.center .form a{
+
+	padding:10px;
+	border-radius: 15px;
+	background-color: blue;
+	color: white;
+	text-decoration: none;
+	margin:15px 4px;
+}
+.center .form a:hover{
+	background-color: rgb(43, 43, 180);
+}
+.center .form label{
+	margin-top: 10px;
+	
+}
+.address{
+	display: none;
 }
 .center .form input{
 	display:block;
@@ -73,6 +93,7 @@
 	border:none;
 	outline:none;
 	box-shadow: inset 2px -3px 8px #123456;
+	
 }
 .center .form select{
 	display:block;
@@ -92,11 +113,11 @@
 .center .form button{
 	
 	margin-top:8px;
-	padding:10px 20px;
+	padding:8px 20px;
 	border:none;
 	outline:none;
 	background:blue;
-	
+	width:100%;
 	font-size:20px;
 	font-weight:550;
 	border-radius:17px;
@@ -117,6 +138,6 @@
 .form a{
 	text-decoration:none;
 }
-.form a:hover{
-	font-size:20px;
+.form p{
+	padding: 20px;
 }

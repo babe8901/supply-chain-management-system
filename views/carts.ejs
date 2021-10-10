@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ">
 </head>
 <body>
+    <%=product%>
     <div class="container">
         <div class="header">
             <div class="heading">
@@ -36,24 +37,34 @@
                               <tr>
                                 <th>Product</th>
                                 <th>Price</th>
-                                <th>Price</th>
+                                <th>Quantity</th>
                                 <th>Amount</th>
                                 <th>Operation</th>
                               </tr>
+                              <%
+                                 for(let i=0;i<product.length;i++){
 
+                                
+                              %>
                               <tr>
-                                <td>12345</td>
-                                <td>Shoes</td>
-                                <td>852</td>
-                              
-                                <td><select id="amount">
-                                    <option id="amount" value="1">1</option> 
-                                    <option id="amount" value="2">2</option> 
-                                    <option id="amount" value="3">3</option> 
+                                <td><%=product[i]['product']%></td>
+                                <td><%=product[i]['price']%></td>
+                                <td><select id="amount" name="quantity">
+                                    <%
+                                    for(let j=1;j<=product[i]['quantity'];j++){
+
+                                   
+                                    %>
+                                    <option id="amount" value="<%=j%>"">1</option> 
+                                   <%}%> 
                                 </select></td>
+                                <td>Amount</td>
+                                
                                 <td><a href="">Delete</a></td>
                             </tr>
-
+                             <% 
+                                }
+                            %>
                           </table>
                       </div>
          

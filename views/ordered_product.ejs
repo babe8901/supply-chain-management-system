@@ -39,9 +39,10 @@
                                   <th>Price</th>
                                   <th>Quantity</th>
                                   <th>Amount</th>
+                                  <th>Delivery Address</th>
                                   <th>Date of order</th>
                                   <th>Delivery Status</th>
-                                  <th>Operation</th>
+                        
                               </tr>
                               <% for(let i=0;i<ordered_product.length;i++){
                                   %>
@@ -50,9 +51,10 @@
                                 <td><%=ordered_product[i]['price']%></td>
                                 <td><%=ordered_product[i]['quantity']%></td>
                                 <td><%=ordered_product[i]['amount']%></td>
+                                <td><%=ordered_product[i]['address']%></td>
                                 <td><%=ordered_product[i]['date']%></td>
                                 <td><%=ordered_product[i]['status']%></td>
-                                <td><a href="">Cancel</a></td>
+                            
                             </tr>
                             <%}%>
                           </table>

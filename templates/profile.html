@@ -4,87 +4,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user-dashboard</title>
-
-    <link rel="stylesheet" type="image/icon" href="">
-		<link rel="stylesheet" href="user-dashboard.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ">
+    <title>Slide Bar</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel = "icon" href = 
+"../image/bd7da51c-5529-4aeb-8df4-a441cebc5abc.jpg" 
+        type = "image/x-icon">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="heading">
-                <h1>Supply Chain Management</h1>
-            </div>
-            <div class="link">
-                <a href="">Home</a>
-                <a href="">Carts</a>
-               
-            </div>
-            <div class="search">
-                <form method="post">
-                    <input type="search"  name="product" id="product">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
-            <div class="log-out">
-                <a href=""><i class="fas fa-sign-out-alt"></i></a>
-            </div>
-        </div>
-        <div class="section">
-            <div class="left-part">
-                <div class="menu">
-                    <i class="fas fa-bars" id="menu"></i>
+
+        
+        <div class="container">
+            
+            <header class="header">
+                <div class="navbar">
+                    <div class="logo">
+                        <h1>e-<span>Shopping </span>
+             
+                    </div>
+                    <div class="search">
+                          <form>
+                              <input type="text"  id="search" name="search" placeholeder="search new product"><span><button id="search-btn"  type="submit">Search</button></span>
+                          </form>
+                    </div>
                 </div>
                 
+                <i class="fas fa-bars" id="bar"></i>
+                <i class="fas fa-window-close"  id="cancel"></i>
+            </header>
+        <div class="home">
+            <div class="slider">
+
                 <center>
-                    <img src="https://www.tcetmumbai.in/image/tcetshieldlogo.jpg">
-                    <p>
-                        
-                    </p>
                     
-
-                </center>
-                <ul>
-                    <li>
-                        <a href="https://www.includehelp.com/node-js/ejs-for-loops.aspx"><i class="fas fa-user-circle"></i>
-                        <span>Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:3000/transaction_history"><i class="fas fa-money-check"></i></i>
-                        <span>Transaction History</span></a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:3000/ordered_product"><i class="fab fa-product-hunt"></i>
-                        <span>Ordered Product</span></a>
-                    </li>
-                   
+                    <img src="../image/download.jpg" alt="">
+                    <p>Lorem, ipsum dolor.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic, necessitatibus.</p>
+                </center> 
+                <ul id="ul">
+                    
+                    <li><a href=""><i class="fas fa-users"></i>Profile</a></li>
+                    <li><a href=""><i class="fas fa-history"></i>Transaction Histroy</a></li>
+                    <li><a href=""><i class="fas fa-cart-plus"></i>Carts</a></li>
+                    <li><a href=""><i class="fab fa-product-hunt"></i>Ordred Product</a></li>
+               
+                    <li id="logout"><a href=""><i class="fas fa-sign-out-alt"></i>logout</a></li>
                 </ul>
-            </div>
-            
-            <div class="right-part">
-                      
-                 <div class="profile">
-                      <div class="profile-left">
-                           <img src="https://mycredible.info/home/assests/img/secure.png" alt="profile image">
-                      </div>
-                      <div class="profile-right">
-                           <h2>Neeraj Kumar Yadav</h2>
-                           <p>95654366</p>
-                           <p>ny587227@gmail.com</p>
-                           </p> Shambhaji Nagar</p>
-                           <a href="">Edit Profile</a>
-                      </div>
-                 </div>
+              </div>
+              <div class="content">
+                <div class="second">
+                    <img src="../image/images.png" alt="">
+               </div>
+                  <div class="first" id="first">
+                     
+                       <h1>Neeraj Kumar Yadav</h1>
+                       <p>9565439966</p>
+                       <p>male</p>
+                       <p>ny587227@gmail.com</p>
+                       <p>Shivvvallabh road, Ashokvan, Dahisar(E), mumbai, Maharastra-400068</p>
+                       <a href="">Edit profile</a>
+                  </div>
+                  
                 
-                
-                 
-
-            </div>
-        </div>
-     
-
-    </div>
+              </div>
+             
+              </div>
+</div>
+             
+    <script src="js/interact.js"></script>
 </body>
 </html>

@@ -133,8 +133,6 @@
 }
 .section .left-part{
 	width: 20%;
-	
-
 	background-color: #404449;
 	height: 100vh;
 	
@@ -214,6 +212,7 @@
 	margin: 0px 3px;
     height: 300px;
 	background-color: rgb(236, 230, 230);
+	
 
 }
 .product-img{

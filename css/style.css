@@ -1,0 +1,396 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    
+}
+body{
+    font-family: Helvetica,Arial,sans-serif;
+}
+
+
+.container{
+    width: 100%;
+    height: 100%;
+
+}
+.container .header{
+    width: 100%;
+
+    text-align: center;
+    font-size: 39px;
+    padding: 10px 0px;
+    
+    background:linear-gradient(#042331,#194255);
+    color: white;
+    font-weight: bold;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+
+    
+}
+.container .logo h1{
+    font-size: 45px;
+}
+.navbar{
+
+    max-width: 80%;
+    margin:auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+
+}
+.navbar .logo{
+    width: 100%;
+    height: 100%;
+
+}
+.logo  h1{
+    font-size: 35px;
+}
+.logo span{
+    color: rgba(243, 7, 7, 0.719);
+}
+.search{
+    width: 70%;
+    height: 100%;
+
+}
+.search form{
+
+}
+.search input,button{
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+#search{
+    width: 200px;
+    border: none;
+}
+#search:focus{
+    outline: none;
+    box-shadow: 1px 2px #123453;
+}
+#search-btn{
+    width: 100px;
+    margin-left: 10px;
+    border: none;
+
+}
+#search-btn:hover{
+    cursor: pointer;
+}
+#search-btn:focus{
+    outline:none;
+}
+#bar{
+    color: white;
+    position: relative;
+    top:45px;
+    left: 30px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1;
+    left: -700px;
+    top:10px;
+    display: none;
+}
+
+#cancel{
+    position: relative;
+    font-size: 30px;
+    top: 23px;
+    left: -470px;
+    top:63px;
+    z-index: 1;
+    
+}
+
+#bar:hover{
+    color: rgb(207, 188, 188);
+}
+#cancel:hover{
+    color: rgb(241, 211, 211);
+    cursor: pointer;
+}
+
+
+/* css for Data Part */
+
+
+.home{
+    width: 100%;
+  
+    display: flex;
+}
+.container .slider{
+    height: 650px;
+    width:23%;
+    padding: 50px 0px;
+    position: relative;
+    transition: 0.4s;
+    background-color: #063146;
+ 
+
+    
+    
+}
+.slider img{
+    width: 110px;
+    height: 110px;
+    border-radius: 110px;
+
+}
+.slider p{
+    color: white;
+    padding: 4px 0px;
+}
+.slider li{
+
+    padding: 25px 0px;
+    border-bottom: 2px solid rgb(83, 82, 82);
+   
+}
+
+.slider a{
+    color: white;
+    text-decoration: none;
+    padding: 0px 30px;
+    font-size: 20px;
+    transition:0.7s;
+    
+}
+.slider i{
+    padding-right: 10px;
+    font-size: 23px;
+}
+.slider  li:hover{
+    background-color: rgb(0, 0, 248);
+}
+.slider  li:hover a{
+    padding-left: 50px;
+
+}
+#logout{
+    border-bottom: none;
+    position: absolute;
+ 
+    text-align: center;
+    
+}
+#logout:hover{
+    background-color: #063146;
+}
+
+
+.content{
+    
+    width: 77%;
+    height: 650px;
+    padding:80px 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.content .first{
+    width: 50%;
+
+    padding:100px 30px;
+}
+#first{
+    padding:50px 30px;
+    background-color: rgba(255, 255, 255, 0.664);
+}
+.content .first h1{
+    font-size: 40px;
+}
+.content .first a{
+    padding: 10px 40px;
+    background-color: red;
+    text-decoration: none;
+    border: none;
+    color: white;
+    position: relative;
+    top: 15px;
+}
+.content .first a:hover{
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+   
+}
+.content .second{
+    width: 50%;
+    height: 90%;
+    
+}
+.content .second img{
+    width:100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.col-1{
+    width: 320px;
+    height: 500px;
+
+    float: left;
+    margin: 10px 10px;
+    padding: 10px;
+}
+.col-1 img{
+    width: 100%;
+    height: 300px;
+}
+
+.col-1 img:hover{
+   cursor: pointer;
+   
+}
+.col-1 i{
+    font-size: 10px;
+    color: rgba(238, 17, 17, 0.767);
+}
+.col-1 p{
+    margin: 5px 0px;
+}
+.latest-product{
+    width: 80%;
+    height: 100%;
+    margin: auto;
+}
+.latest-product .all-product{
+    width: 100%;
+    height:100%;
+    margin: auto;
+    padding: 30px 0px;
+
+    overflow: auto;
+}
+.all-product  .title{
+  
+     text-align: center;
+     padding: 10px 0px;
+
+}
+
+.all-product .title hr{
+    width: 10%;
+    margin: auto;
+    
+}
+.all-product .product-list{
+    padding: 50px 0px;
+ 
+}
+.all-product .product-list .col-2{
+    width:210px;
+    height: 350px;
+
+    margin: 10px 15px;
+    float: left;
+    overflow: hidden;
+   
+}
+.col-2 .image{
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+.col-2 .image img{
+    width: 100%;
+    height: 200px;
+    
+}
+.col-2 img:hover{
+     transform: scale(1.5);
+}
+.col-2 i{
+    color: red;
+
+    font-size: 12px;
+}
+
+.latest-product #next a{
+    margin: 20px 16px;
+    text-decoration: none;
+    position:relative;
+    top: 10px;
+    padding: 9px 40px;
+    background-color: red;
+    color:white;
+    border-radius: 15px;
+    margin-bottom: 20px;
+
+}
+
+#next a:hover{
+    background-color: rgba(255, 0, 0, 0.781);
+}
+
+.all-product .row{
+
+    padding: 30px 20px;
+
+    display: flex;
+}
+.all-product .row .col-3{
+
+     width: 50%;
+     height: 800px;
+     padding: 40px 40px;
+     overflow: hidden;
+     transition: 0.5s ease;
+}
+.all-product .row .col-3 img{
+    width: 100%;
+    height: 100%;
+}
+.all-product .row .col-3 img:hover{
+    transform: scale(1.4);
+    
+}
+.all-product .row .col-4{
+    width: 50%;
+
+    padding: 140px 50px;
+
+}
+.all-product .row .col-4 i{
+    color: red;
+}
+.all-product .row .col-4 h1,h3,p{
+    margin: 5px 0px;
+}
+.all-product .row .col-4 a{
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 15px;
+    position: relative;
+    top: 14px;
+}
+.all-product .row .col-4 a:hover{
+    background-color:rgba(255, 0, 0, 0.548);
+    cursor: pointer;
+}
+
+
+
+.footer{
+    width: 100%;
+    height: 200px;
+    border: 4px solid black;
+   
+    background-color:#123453;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}

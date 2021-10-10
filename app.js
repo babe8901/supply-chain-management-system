@@ -1,3 +1,5 @@
+//  Import All dependcies-----------------------------------------------------------
+
 var bodyParser=require("body-parser");
 var cookieParser=require("cookie-parser");
 var session=require("express-session");
@@ -8,22 +10,35 @@ const ejs=require("ejs")
 const express=require("express");
 const { urlencoded } = require("body-parser");
 const app=express();
+
+//Import All your model---------------------------------------------------------------
 const userModel=require("./database_module").userModel
 const productModel=require("./database_module").productModel;
 const transactionModel=require("./database_module").transactionModel;
 const orderedModel=require("./database_module.js").orderedModel;
+const accountModel=require("./database_module.js").accountModel;
+const cartModel=require("./database_module.js").cartModel;
+
+
+
 const { ObjectId } = require("bson");
 const { now } = require("mongoose");
+const { resolveNaptr } = require("dns");
+const { readdirSync } = require("fs");
 const port=3000;
 var username=""
 var user=""
 var product=""
+var buy_new_product=""
+var temp1=""
+var temp2=""
 
-// Set View Engion----------------------------------------------------------
+// Set View Engion---------------------------------------------------------------------
 app.set("view engine","ejs");
 
 
 //Middle wares
+
 app.use(express.static(path.join(__dirname,"css")))
 app.use(express.static(path.join(__dirname,"js")));
 app.use(express.static(path.join(__dirname,"image")))
@@ -158,6 +173,7 @@ app
 //----------------------------------------------------------ROUTE FOR USER'S DASHBOARD------------------------------------------------------------
 app.get("/user-dashboard", async(req, res) => {
     //console.log(user,"user-dashboard login")
+   
     user = await userModel.findOne({ email: username }).exec();
     product=await productModel.find().exec();
     //console.log(user)
@@ -193,7 +209,8 @@ app.route("/transaction_history")
 .get(async(req,res)=>{
     try{
         if (req.session.user && req.cookies.user_sid){
-           transaction=await transactionModel.find({"email":username}).exec();
+      
+           transaction=await transactionModel.find({"user":username}).exec();
            console.log(transaction)
            console.log("Hello Transaction History",username)
             res.render("transaction_history",{
@@ -240,10 +257,26 @@ app.get("/delete_transaction/:id",async(req,res)=>{
 
 //----------------------------------------------------------ROUTE FOR CARTS------------------------------------------------------------
 app.route("/carts")
-.get((req,res)=>{
+.get(async(req,res)=>{
     try{
         if (req.session.user && req.cookies.user_sid){
-            res.render("carts")
+
+          //get product detail.......
+          product=await productModel.findOne({"_id":"61552441987a4cc76db4f1bd"})
+          console.log(product)
+          newRecord=new cartModel({
+            user:username,
+            product:product['title'],
+            price:product['price'],
+            quantity:product['quantity'],
+ 
+          })
+          newRecord.save().then(result=>{
+            res.redirect("user-dashboard")
+          }).catch(error=>{
+            console.log(error)
+          })
+         
         }
         else {
             res.redirect("/login");
@@ -254,6 +287,27 @@ app.route("/carts")
     }
     
     
+})
+
+app.get("/total-carts",async(req,res)=>{
+  try{
+    if(req.session.user && req.cookies.user_sid){
+      data=await cartModel.find({user:username}).then(result=>{
+        res.render("carts",{
+          product:result
+        })
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+    else{
+      res.redirect("/login")
+    }
+  }
+  catch(err){
+    console.log(err)
+  }
+  
 })
 
 //----------------------------------------------------------ROUTE FOR PROFILE---------------------------------------------------
@@ -342,49 +396,165 @@ app.post("/edit-profile",async(req,res)=>{
 
 
 //----------------------------------------------------------ROUTE FOR ORDERED BUY-NOW----------------------------------------------
+
 app.get("/buy-now/:id",async(req,res)=>{
   try{
      if(req.session.user && req.cookies.user_sid){
-    
-      console.log("Hello World..",req.params.id)
-     
-     
-      productModel.findOne({_id:req.params.id}, function(error,doc) {
-      if (error) {
-        console.log(error);
-      } else {
-         res.redirect("/buy-now")
-      }
-  });
-  
-  }
-}
-catch(err){
-  console.log(err)
-}
-});
+        
+         buy_new_product=await productModel.findOne({"_id":req.params.id})
+         
+         res.render("buy-now",{
+           product:buy_new_product,
+           user:user
 
-app.get("/buy-now",(req,res)=>{
+         })
+     }
+     else{
+       res.redirect("/login")
+     }
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.post("/buy-now",async(req,res)=>{
   try{
      if(req.session.user && req.cookies.user_sid){
+      data=req.body;
+      console.log(data,"Majnu bhai")
+      var account=await accountModel.findOne({"user_id":data["email"]}).exec();
+      
+      paidAmount=buy_new_product['price']*data['quantity']
+      //Update User Balance.........................
+      if(account['balance']>=paidAmount){
+        
     
-      res.render("buy-now")
-     
-  
-  }
+        await accountModel.findOneAndUpdate({"bank_user_id":data["email"]},{
+          $set:{
+            balance:account['balance']-paidAmount
+          }
+        }).then(result1=>{
+          console.log("Balance Updated..")
+          temp1=1
+        }).catch(error=>{
+          res.send("<h1>Failed to pay..</h1>")
+        })
+         
+
+        //Update Quantity of Product..........
+        if(buy_new_product['quantity']<data['quantity']){
+          res.send("Product is not avaiable in stock....")
+        }
+        else{
+          await productModel.findOneAndUpdate({"_id":buy_new_product['_id']},{
+            $set:{
+              quantity:buy_new_product['quantity']-data['quantity']
+            }
+          }).then(result2=>{
+            console.log("Quantity Updated....")
+            temp2=1
+            
+          }).catch(error=>{
+            res.send("Failed to update product amount")
+          })
+
+          // Check Whether all functions are done or not
+          if(temp1 && temp2){
+            res.redirect("/user-dashboard")
+          }
+          else{
+
+            //if transaction is done but order doesn't take place then update reduced balane
+            if(!temp2){
+              await accountModel.findOneAndUpdate({"bank_user_id":data["email"]},{
+                $set:{
+                  balance:account['balance']+paidAmount
+                }
+              })
+            }
+          }
+          
+        }
+
+      
+        // Set Transaction History to database.....................
+        const transactionHistory=new transactionModel({
+          user:username,
+          userid:data["email"],
+          product:buy_new_product["title"],
+          price:buy_new_product["price"],
+          quantity:data["quantity"],
+          amount:buy_new_product['price']*data['quantity']
+
+      })
+
+      transactionHistory.save()
+
+       console.log(buy_new_product["address"])
+      //SET ORDERED PRODUCT TABLE------------------------------------
+      const orderedProduct=new orderedModel({
+        user:username,
+        userid:data["email"],
+        product:buy_new_product["title"],
+        price:buy_new_product["price"],
+        quantity:data['quantity'],
+        amount:buy_new_product['price']*data['quantity'],
+        address:data['address'],
+        status:"pending"
+        
+
+    })
+
+       orderedProduct.save()
+       res.redirect("/user-dashboard")
+
+
+
+       
+      }
+      else{
+        res.send("Insufficient Amount..")
+      }
+     }
+    else{
+      res.redirect("/login")
+    }
 }
 catch(err){
   console.log(err)
 }
 });
 
+//---------------------------------------------------------ROUTE FOR PRODUCT---------------------------------
+app.get("/product/:id",async(req,res)=>{
+  try{
+    if(req.session.user && req.cookies.user_sid){
+      console.log(req.params.id)
+      await productModel.findOne({"_id":req.params.id}).then(result=>{
+        res.render("product",{
+          product:result
+        })
+      }).catch(err=>{
+        res.send(err)
+      })
+     
+    }
+    else{
+      redirect("/login")
+    }
+  }
+  catch(err){
+    console.log(err)
+  }
+})
 
 //----------------------------------------------------------ROUTE FOR ORDERED PRODUCT------------------------------------------------------------
 app.get("/ordered_product",async(req,res)=>{
    try{
       if(req.session.user && req.cookies.user_sid){
-        console.log("Hello My love",username)
-          var ordered_product=await orderedModel.find({userid:username}).exec();
+        
+          var ordered_product=await orderedModel.find({user:username}).exec();
        
           res.render("ordered_product",{
             ordered_product:ordered_product

@@ -4,11 +4,24 @@ console.log(data)
 const logout=document.getElementsByClassName("log-out")
 
 var logout_para=document.getElementById("logout");
-logout[0].addEventListener("mouseover",()=>{
-    logout_para.innerHTML="logout";
 
-    logout_para.style.paddingLeft="10px"
+
+//Show Destination Address
+var address=document.getElementsByClassName("address")
+console.log(address)
+
+var registered_address=document.getElementById("registered_address")
+var new_address=document.getElementById("new_address")
+console.log(registered_address)
+console.log(new_address)
+
+registered_address.addEventListener("click",function(){
+    address[0].style.display="block";
+    document.getElementById("address").value="<%=user['address']%>"
+    
+
 })
-logout[0].addEventListener("mouseout",()=>{
-    logout_para.innerHTML="";
+new_address.addEventListener("click",()=>{
+    address[0].style.display="block";
+    document.getElementById("address").value=""
 })

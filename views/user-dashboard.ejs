@@ -4,104 +4,358 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user-dashboard</title>
-
-    <link rel="stylesheet" type="image/icon" href="">
-		<link rel="stylesheet" href="user-dashboard.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ">
+    <title>Slide Bar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel = "icon" href = 
+"/bd7da51c-5529-4aeb-8df4-a441cebc5abc.jpg" 
+        type = "image/x-icon">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <div class="heading">
-                <h1>Supply Chain Management</h1>
-            </div>
-            <div class="link">
+
+        <div class="container">
+            
+            <header class="header">
+                <div class="navbar">
+                    <div class="logo">
+                        <h1>e-<span>Shopping </span>
+             
+                    </div>
+                    <div class="search">
+                          <form>
+                              <input type="text"  id="search" name="search" placeholeder="search new product"><span><button id="search-btn"  type="submit">Search</button></span>
+                          </form>
+                    </div>
+                </div>
                 
+                <i class="fas fa-bars" id="bar"></i>
+                <i class="fas fa-window-close"  id="cancel"></i>
+            </header>
+        <div class="home">
+            <div class="slider">
+
+                <center>
+                    
+                    <img src="download.jpg" alt="">
+                    <p> <%=user['name']%></p>
+                    <p> <%=user['mobile']%></p>
+                </center> 
+                <ul id="ul">
+                    
+                    <li><a href="http://localhost:3000/profile"><i class="fas fa-users"></i>Profile</a></li>
+                    <li><a href="http://localhost:3000/transaction_history"><i class="fas fa-history"></i>Transaction Histroy</a></li>
+                    <li><a href="http://localhost:3000/carts"><i class="fas fa-cart-plus"></i>Carts</a></li>
+                    <li><a href="http://localhost:3000/ordered_product"><i class="fab fa-product-hunt"></i>Ordred Product</a></li>
+               
+                    <li id="logout"><a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i>logout</a></li>
+                </ul>
+              </div>
+              <div class="content">
+                  <div class="first">
+                      <h3>E‑COMMERCE & RETAIL MARKETING</h3>
+                       <h1>Marketing that drives e‑commerce success</h1>
+                       <p>Whether you’re getting online for the first time or scaling, Mailchimp has tools and insights to help you sell more stuff.</p>
+                       <a href="">Join Us</a>
+                  </div>
+                  <div class="second">
+                       <img src="pexels-photo-5632402.jpeg" alt="">
+                  </div>
                 
+              </div>
+             
+              </div>
+<!-- 
+              -------------------------------------------All Product------------------------------------------------ -->
+
+            <div class="latest-product">
+
            
+              <div class="all-product">
+                <div class="title">
+                    <h1>All Product</h1>
+
+                    <hr>
+                </div>
+                <div class="product-list">
+
+                    <%for(let i=0;i<product.length;i++){
+                        
+                   %>
+                    <div class="col-2">
+                        <div class="image">
+                            <a  href="http://localhost:3000/product/<%=product[i]['_id']%>"> <img  src="<%=product[i]['image']%>"  alt="">  </a>
+                        </div>
+                      
+                        <p><%=product[i]['title']%><p>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                          <p>price:$<%=product[i]['price']%></p>
+                       
+                      
+                    </div>
+
+                <%}%>
+                    
+                     <div class="col-2">
+                         <div class="image">
+                            <a  href=""> <img  src="images.jpg"  alt="">  </a>
+
+                         </div>
+                        
+                         <p>Lorem, ipsum dolor.<p>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star-half-alt"></i>
+                           <p>$300</p>
+                       
+                     </div>
+                     <div class="col-2">
+                         <div class="image">
+                            <a  href=""> <img  src="images (6).jpg"  alt="">  </a>
+
+                         </div>
+                        
+                         <p>Lorem, ipsum dolor.<p>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star-half-alt"></i>
+                           <p>$300</p>
+                       
+                     </div>
+                     <div class="col-2">
+                         <div class="image">
+                            <a  href=""> <img  src="images (5).jpg"  alt="">  </a>
+
+                         </div>
+                       
+                         <p>Lorem, ipsum dolor.<p>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star-half-alt"></i>
+                           <p>$300</p>
+                       
+                     </div>
+                     <div class="col-2">
+                         <div class="image">
+                            <a  href=""> <img  src="download (1).jpg"  alt="">  </a>
+
+                         </div>
+                       
+                         <p>Lorem, ipsum dolor.<p>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star-half-alt"></i>
+                           <p>$300</p>
+                       
+                     </div>
+                     <div class="col-2">
+                         <div class="image">
+                            <a  href=""> <img  src="download (2).jpg"  alt="">  </a>
+
+                         </div>
+                        
+                         <p>Lorem, ipsum dolor.<p>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star-half-alt"></i>
+                           <p>$300</p>
+                       
+                     </div>
+                     <div class="col-2">
+
+                         <div class="image">
+                            <a  href=""> <img  src="download (3).jpg"  alt="">  </a>
+                        
+                         </div>
+                       
+                         <p>Lorem, ipsum dolor.<p>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star"></i>
+                             <i class="fas fa-star-half-alt"></i>
+                           <p>$300</p>
+                       
+                     </div>
+                    
+                </div>
+                
             </div>
-            <div class="search">
-                <form method="post">
-                    <input type="search"  name="product" id="product">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
-            <div class="log-out">
-                <a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i></a>
-                <p id="logout"></p>
+            <div id="next">
+                <a href="">Next<span>&#8594;</span></a>
             </div>
         </div>
-        <div class="section">
-            <div class="left-part">
-                <div class="menu">
-                    <i class="fas fa-bars" id="menu"></i>
-                </div>
-                
-                <center>
-                    <img src="https://www.tcetmumbai.in/image/tcetshieldlogo.jpg">
-                    <p>
-                        <%= user["name"]%>
-                    </p>
-                    <p><%= user["mobile"]%></p>
-                    
-                    
-                    
-                </center>
-                <ul>
-                    <li>
-                        <a href="http://localhost:3000/profile"><i class="fas fa-user-circle"></i>
-                        <span>Profile</span></a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:3000/transaction_history"><i class="fas fa-history"></i>
-                            <span>Transaction History</span></a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:3000/carts"><i class="fas fa-cart-plus"></i>
-                            <span>Carts</span></a>
-                    </li>
-                      <li>
-                        <a href="http://localhost:3000/ordered_product"><i class="fab fa-product-hunt"></i>
-                            <span>Ordered Product</span></a>
-                    </li>
-                   
-                </ul>
+
+
+<!-- 
+        ----------------Latest product--------------------------------- -->
+        <div class="latest-product">
+
+       
+        <div class="all-product">
+            <div class="title">
+                <h1>Latest Product</h1>
+
+                <hr>
             </div>
+            <div class="product-list">
+                <div class="col-2">
+                    <div class="image">
+                        <a  href=""> <img  src="m-vhjgbslbo13212-van-heusen-original-imag22g5dy3s3bvz.jpeg"  alt="">  </a>
+                    </div>
+                   
+                    <p>Solid Men Dark Blue Track Pants<p>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                      <p>$300</p>
+                  
+                </div>
+                <div class="col-2">
+                    <div class="image">
+                        <a  href=""> <img  src="7-444-gry-org-bruton-orange-original-imagfp7fzz5ftzfc.jpeg"  alt="">  </a>
+                    </div>
+                    
+                     <p>Trendy Sports Running Running Shoes For Men  (Orange, Grey)<p>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star-half-alt"></i>
+                       <p>$300</p>
+                   
+                 </div>
+                 <div class="col-2">
+                     <div class="image">
+                        <a  href=""> <img  src="6-386922-puma-peacoat-high-risk-red-original-imag7et2fbxnrnhc.jpeg"  alt="">  </a>
+                     </div>
+                    
+                     <p>Hustle v2 IDP Running Shoes For Men  (Blue)<p>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star-half-alt"></i>
+                       <p>$300</p>
+                   
+                 </div>
+                 <div class="col-2">
+                    <div class="image">
+                        <a  href=""> <img  src="34-men-s-formal-casual-brown-genuine-leather-belt-ddkatabr-belt-original-imafpnn8jqyujyzd.jpeg"  alt="">  </a>
+                    </div>
+                  
+                     <p>Men Evening, Party, Formal, Casual Brown Genuine Leather Belt<p>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star-half-alt"></i>
+                       <p>$300</p>
+                   
+                 </div>
+                 <div class="col-2">
+                     <div class="image">
+                        <a  href=""> <img  src="32-maw21jn172-metronaut-original-imag69g3fqw2xhvz.jpeg"  alt="">  </a>
+                     </div>
+                   
+                     <p>Slim Men Dark Blue Jeans<p>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star"></i>
+                         <i class="fas fa-star-half-alt"></i>
+                       <p>$300</p>
+                   
+                 </div>
             
-            <div class="right-part">
+                   
             
                 
-                <div class="category">
-               
-                <% for(let i=0;i<product.length;i++){
-                    %>
-               
-                <div class="product">
-                    <div class="product-img">
-                         <img src="https://th.bing.com/th/id/OIP.zGnn7M87JT55AHX8iY8_OAHaEo?pid=ImgDet&rs=1" alt="image">
-                    </div>
-                    <div class="product-detail">
-                          <h1><%=product[i]["title"]%></h1>
-                          <p><%=product[i]["description"]%></p>
-                          <p><%=product[i]["price"]%>/-</p>
-                          <div class="operation">
-                          
-                            <a href="">add carts</a><span><a href="http://localhost:3000/buy-now/<%=product[i]['_id']%>">Buy Now</a></span>
-                          </div>
-                          
-                    </div>
-                </div>
-                <%}%>
             </div>
            
-
-            </div>
-                </div>
-     
-
     </div>
-    <!-- <script src="form.js"></script> -->
+    <div id="next">
+        <a href="">Next<span>&#8594;</span></a>
+    </div>
+   
+</div>
+         
+<!--         
+    --------------------------------------------Offer product------------------------------------ -->
+        
+
+        <div class="all-product" style='width: 80%;margin:auto'>
+            <div class="row">
+                 <div class="col-3">
+                       <img src="https://rukminim1.flixcart.com/image/416/416/k8vyf0w0/smartwatch/h/c/n/wrb-sw-colorfitpro2-std-blk-android-ios-noise-original-imafqsqgcgsb79fg.jpeg?q=70" alt="">
+                 </div>
+                 <div class="col-4">
+                      <p>Home/Type</p>
+                      <h1>Noise ColorFit Pro 2 Smartwatch  (Black Strap, Regular)</h1>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                      <p>$200</p>
+                      <h3>Description:</h3>
+                      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos minus velit veniam sint, consequuntur nam voluptate et ipsa. Iure pariatur nam ex laudantium, reprehenderit eveniet quidem non placeat praesentium labore amet saepe dolores at quaerat molestiae. Molestias sequi nisi laborum.</p>
+                      <a href="">Buy Now</a>
+                    </div>
+            </div>
+        </div>
+
+        <div class="all-product" style='width: 80%;margin:auto'>
+            <div class="row">
+                <div class="col-4">
+                    <p>Home/Type</p>
+                    <h1>Men Dhoti & Kurta Set Art Silk</h1>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <p>$200</p>
+                    <h3>Description:</h3>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos minus velit veniam sint, consequuntur nam voluptate et ipsa. Iure pariatur nam ex laudantium, reprehenderit eveniet quidem non placeat praesentium labore amet saepe dolores at quaerat molestiae. Molestias sequi nisi laborum.</p>
+                    <a href="">Buy Now</a>
+                  </div>
+                 <div class="col-3">
+                       <img src="m-white-jacq-k-gold-dhoti-lup-larwa-original-imafsk55bzgjvwx8.jpeg" alt="">
+                 </div>
+                
+            </div>
+        </div>
+
+
+
+        <!-- ------------------------------------------footer------------------------------------------ -->
+
+        <div class="footer">
+            <p>copyrigt 2021 @ Neeraj Yadav and shubham yadav</p>
+        </div>
+
+
+
+        </div>
+ 
+   
+    <script src="interact.js"></script>
 </body>
 </html>

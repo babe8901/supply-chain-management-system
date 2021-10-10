@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now New Product</title>
+
+    <link rel="stylesheet" type="image/icon" href="">
+  
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ">
+    
+
+        <style>
+            *{
+                margin:0px;
+                padding:0px;
+                box-sizing:border-box;
+                font-family:Garamond;
+            }
+            .container{
+                width:100%;
+                
+                
+            }
+            .container #login,#register{
+                
+                display:inline-block;
+                margin:15px 20px;
+                text-decoration:none;
+                background-color:blue;
+                padding:7px 20px;
+                border-radius:17px;
+                font-size:20px;
+                color:white;
+            }
+            .container #login:hover{
+                background-color:red;
+            }
+            .container #login:focus{
+                background-color:pink;
+            }
+            .container #register:hover{
+                background-color:red;
+            }
+            .container #register:focus{
+                background-color:pink;
+            }
+            .center{
+                
+                width:500px;
+                margin:100px auto;
+                box-shadow: inset 1px -5px 6px #132456;
+            }
+            .center i{
+                position:relative;
+                
+                float:right;
+                top:20px;
+                padding:7px 15px;
+                cursor:pointer;
+            }
+            .center h1{
+                text-align:center;
+                margin:40px 0px;
+                
+                clear:right;
+            }
+            .center .form{
+                
+                padding:10px 20px;
+            }
+            .center .form label{
+                display:block;
+                
+                padding:5px 0px;
+                margin:10px 0px;
+                font-size:20px;
+            
+            }
+            .center .form a{
+            
+                padding:10px;
+                border-radius: 15px;
+                background-color: blue;
+                color: white;
+                text-decoration: none;
+                margin:15px 4px;
+            }
+            .center .form a:hover{
+                background-color: rgb(43, 43, 180);
+            }
+            .center .form label{
+                margin-top: 10px;
+                
+            }
+            .address{
+                display: none;
+            }
+            .center .form input{
+                display:block;
+                
+                width:100%;
+                
+                padding:10px 10px;
+                border-radius:3px;
+                border:none;
+                outline:none;
+                box-shadow: inset 2px -3px 8px #123456;
+                
+            }
+            .center .form select{
+                display:block;
+                padding:10px 15px;
+                border-radius:3px;
+                border:none;
+                outline:none;
+                margin-top:5px;
+                float:left;
+                
+                width:49%;
+                box-shadow: inset 2px -3px 8px #123456;
+            }
+            #gender{
+                float:right;
+            }
+            .center .form button{
+                
+                margin-top:8px;
+                padding:8px 20px;
+                border:none;
+                outline:none;
+                background:blue;
+                width:100%;
+                font-size:20px;
+                font-weight:550;
+                border-radius:17px;
+                
+            }
+            .center .form button:hover{
+                background-color:white;
+                border:1px solid blue;
+            }
+            .center .form button:focus{
+                background-color:pink;
+            }
+            .center .form p{
+                margin:5px 0px;
+                
+                
+            }
+            .form a{
+                text-decoration:none;
+            }
+            .form p{
+                padding: 20px;
+            }
+            
+        </style>
+    </head>
+<body>
+     <%=user%>
+    <%=product%> 
+
+    <div class="container">
+        <div class="header">
+            <div class="heading">
+                <h1>Supply Chain Management</h1>
+            </div>
+            <div class="link">
+                <a href="http://localhost:3000/user-dashboard">Home</a>
+               
+                
+            </div>
+          
+            <div class="log-out">
+                <a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+        <div class="section">
+              
+			<div class="center">
+                
+               <h1>Details</h1> 
+                  <div class="form">
+                      <a href="#" id="registered_address">Registered Address</a><span><a href="#" id="new_address">New Address</a></span>
+                      <form method="post" action="http://localhost:3000/buy-now"">
+                        <div class="address">
+                           <label for="name">Address</label>
+                            <input type="text" placeholder="Address" id="address" name="address" required>
+                        </div>
+                          <label for="quantity">Quantity</label>
+                          <input type="text" list="rid" name="quantity" placeholder="Enter Receiver User id" required/></label>
+                       <datalist id="rid">
+                      
+                                <%
+                                   for(let i=1;i<=product['quantity'];i++){
+
+                                   
+                                %>
+                                   <option value=<%=i%>>
+                                 <%
+                                   }
+                                 %>
+                           
+                        </datalist>
+                          <label for="email">Bank User Id</label>
+                          <input type="text" placeholder="user id" id="email" name="email" required>
+                          <label for="password">Password</label>
+                          <input type="password" placeholder="password" id="email" name="password" required>
+                          <p id="pass-verify"></p>
+                         
+                         
+                         
+                          <button type="submit">Pay <%=product['price']%></button>
+                          
+                      </form>
+                      <p></p>
+                     
+                  </div>				
+              </div>
+        </div>
+         
+
+     
+
+    </div>
+    <script src="form.js"></script>
+    <script>
+        
+//Show Destination Address
+var address=document.getElementsByClassName("address")
+console.log(address)
+
+var registered_address=document.getElementById("registered_address")
+var new_address=document.getElementById("new_address")
+console.log(registered_address)
+console.log(new_address)
+
+registered_address.addEventListener("click",function(){
+    address[0].style.display="block";
+    document.getElementById("address").value="<%=user['address']%>"
+    
+
+})
+new_address.addEventListener("click",()=>{
+    address[0].style.display="block";
+    document.getElementById("address").value=""
+})
+    </script>
+</body>
+</html>

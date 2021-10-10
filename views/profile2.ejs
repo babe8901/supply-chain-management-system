@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user-dashboard</title>
+
+    <link rel="stylesheet" type="image/icon" href="">
+		<link rel="stylesheet" href="user-dashboard.css">
+        <link rel="stylesheet" href="profile.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ">
+    <style>
+        .bold{
+            font-weight: bold;
+        }
+    </style>
+    </head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="heading">
+                <h1>Supply Chain Management</h1>
+            </div>
+            <div class="link">
+                <a href="http://localhost:3000/user-dashboard">Home</a>
+               
+               
+            </div>
+        
+            <div class="log-out">
+                <a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+        <div class="section">
+            <div class="left-part">
+                <div class="menu">
+                    <i class="fas fa-bars" id="menu"></i>
+                </div>
+                
+                <center>
+                    <img src="https://www.tcetmumbai.in/image/tcetshieldlogo.jpg">
+                    <<p>
+                        <%= user["name"]%>
+                    </p>
+                    <p><%= user["mobile"]%></p>
+                    
+                    
+                    
+                </center>
+                <ul>
+                    <li>
+                        <a href="http://localhost:3000/profile?username=<%=user['email']%>"><i class="fas fa-user-circle"></i>
+                        <span>Profile</span></a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:3000/transaction_history"><i class="fas fa-history"></i>
+                            <span>Transaction History</span></a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:3000/carts"><i class="fas fa-cart-plus"></i>
+                            <span>Carts</span></a>
+                    </li>
+                      <li>
+                        <a href="http://localhost:3000/ordered_product"><i class="fab fa-product-hunt"></i>
+                            <span>Ordered Product</span></a>
+                    </li>
+                   
+                </ul>
+            </div>
+            
+            
+           
+                      
+                 <div class="profile">
+                      <div class="profile-left">
+                           <img src="https://mycredible.info/home/assests/img/secure.png" alt="profile image">
+                      </div>
+                      <div class="profile-right">
+                           <h2><%=user["name"]%></h2>
+                           <p><span class="bold">Contact No:</span><%=user["mobile"]%></p>
+                           <p><span class="bold">Email Id:</span><%=user["email"]%></p>
+                           <p><span class="bold">User Type:</span><%=user["utype"]%></p>
+                           <p> <span class="bold">Gender:</span><%=user["gender"]%></p>
+                           </p><span class="bold">Address:</span><%=user["address"]%></p>
+                           <a href="http://localhost:3000/edit-profile?email=<%=user['email']%>">Edit Profile</a>
+                      </div>
+              
+                
+                
+                 
+
+            </div>
+        </div>
+     
+
+    </div>
+</body>
+</html>
