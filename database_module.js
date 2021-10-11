@@ -100,7 +100,7 @@ module.exports.cartModel=cartModel
 
 
 //Create schema for feedback
-const feedback = new mongoose.Schema({
+const message = new mongoose.Schema({
     "f_name" : String,
     "l_name" : String,
     "area_code" : String,
@@ -112,5 +112,14 @@ const feedback = new mongoose.Schema({
     "datetime" : {type : Date, default : Date.now}
 }, {collection : "feedback"})
 
-const feedbackModel = mongoose.model("feedback", feedback)
-module.exports.feedbackModel = feedbackModel
+const feedbackModel = mongoose.model("message", feedback)
+module.exports.messageModel = feedbackModel
+//-------------------------------------------------- FEEDBACK SCHEMA -------------------------
+const feedback=new mongoose.Schema({
+    "user":String,
+    "product_id":String,
+    "feedback":String
+},{collection:"feedback"})
+
+const feedbackModel=mongoose.model("feedback",feedback)
+module.exports.feedbackModel=feedbackModel
