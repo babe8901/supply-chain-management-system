@@ -18,6 +18,7 @@ const transactionModel=require("./database_module").transactionModel;
 const orderedModel=require("./database_module.js").orderedModel;
 const accountModel=require("./database_module.js").accountModel;
 const cartModel=require("./database_module.js").cartModel;
+const feedbackModel=require("./database_module.js").feedbackModel;
 
 
 
@@ -570,7 +571,52 @@ app.get("/ordered_product",async(req,res)=>{
    }
 })
 
+//---------------------------------------------------------FEEDBACK --------------------------------------
+app.post("/feedback/:id",(req,res)=>{
+  try{
+     if(req.session.user && req.cookies.user_sid){
+       var product_id=req.params.id
+       console.log("Hello Product is",product_id)
+       newRecord=new feedbackModel({
+         user:username,
+         product_id:product_id,
+         feedback:req.body.feedback
+       })
+       newRecord.save().then(result=>{
+         res.redirect("http://localhost:3000/product/"+req.params.id)
+       }).then(err=>{
+         console.log(err)
+       })
+      
+     }else{
+       res.redirect("/login")
+     }
+  }catch(err){
+     console.log(err)
+  }
+})
 
+//---------------------------------------------------------- ALL REVIEWS ---------------------------
+app.get("/review/:id",async(req,res)=>{
+  try{
+      if(req.session.user && req.cookies.user_sid){
+         product_id=req.params.id
+         review=await feedbackModel.find({"product_id":req.params.id});
+         product=await productModel.find({"_id":req.params.id})
+         res.render("product",{
+           review:review,
+           user:user,
+           product:product
+           
+         })
+      }
+      else{
+        res.redirect("/login")
+      }
+  }catch(err){
+    console.log(err)
+  }
+})
   // route for handling 404 requests(unavailable routes)
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!");

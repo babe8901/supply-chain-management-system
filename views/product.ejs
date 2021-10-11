@@ -34,6 +34,7 @@ width: 50%;
 height: 100%;
 
 padding: 80px 40px;
+
 }
 .container .product .col-1 img{
 width:100%;
@@ -51,17 +52,68 @@ top: 20px;
 }.container .product .col-1 a:hover{
 background-color: white;
 color: red;
-border: 1px solid red;
+
 }
 .container .product .col-1 i{
+    color: red;
+    
+}
+.feedback{
+    display: block;
+  
+    margin:30px 0px;
+}
+.container .product .col-1  form{
+
+    margin-top: 50px;
+    padding: 10px 10px;
+    display: none;
+}
+.container .product .col-1  label,input,button{
+    display: block;
+}
+.container .product .col-1  label{
+    padding: 10px 0px;
+}
+.container .product .col-1  input{
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 1px solid rgb(209, 187, 187);
+    width: 90%;
+    outline: none;
+}
+.container .product .col-1  button{
+    padding: 8px 30px;
+    background-color: red;
+    color: white;
+    margin-top: 10px;
+    border: none;
+}
+.container .product .col-1  button:hover{
+
+    background-color: white;
+    cursor: pointer;
     color: red;
 }
 #col-1{
 padding: 200px 30px;
 }
+.review{
+    width: 100%;
+    height: 100%;
+
+    padding: 10px 10px;
+    display: none;
+}
+.review .each-review{
+    width: 100%;
+    padding: 10px 0px;
+
+}
             </style>
         </head>
 <body>
+
     <div class="container">
          <div class="product">
              <div class="col-1">
@@ -81,8 +133,38 @@ padding: 200px 30px;
                 <h4>Description</h4>
                 <p><%=product['description']%></p>
                 <a href="http://localhost:3000/user-dashboard"><span>&#8592;</span>Back</a><span></span><a href="http://localhost:3000/buy-now/<%=product['_id']%>">Buy<span>&#8594;</span></a></span>
-             </div>
+                <div class="feedback"><a href="#feedback" id="feedback"><span></span>Give feedback</a><span></span><a id="review" href="#review-detail">All review<span></span></a></span>   </div>
+                <form id="form" method="post" action="http://localhost:3000/feedback/<%=product['_id']%>">
+                    <label for="feedback">Give your valuable feedback</label>
+                    <input type="text" i="feedback" name="feedback" placeholder="Give feedback">
+                    <button type="submit">Submit</button>
+                </form>
+                <div class="review" id="review-detail">
+                     <div class="each-review">
+                         
+                     </div>
+                </div>
+            </div>
          </div>
     </div>
+
+    <script>
+        var feedback=document.getElementById("feedback")
+        console.log(feedback)
+        var review=document.getElementById("review")
+        console.log(review)
+        var form=document.getElementById("form")
+        var review_part=document.getElementsByClassName("review")
+        console.log(review_part)
+        feedback.addEventListener("click",()=>{
+            form.style.display="block";
+            review_part[0].style.display="none"
+        })
+        review.addEventListener("click",()=>{
+              review_part[0].style.display="inline-block"
+              form.style.display="none";
+        })
+        
+    </script>
 </body>
 </html>

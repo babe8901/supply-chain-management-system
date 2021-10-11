@@ -97,3 +97,13 @@ const cart=new mongoose.Schema({
 
 const cartModel=mongoose.model("cart",cart)
 module.exports.cartModel=cartModel
+
+//-------------------------------------------------- FEEDBACK SCHEMA -------------------------
+const feedback=new mongoose.Schema({
+    "user":String,
+    "product_id":String,
+    "feedback":String
+},{collection:"feedback"})
+
+const feedbackModel=mongoose.model("feedback",feedback)
+module.exports.feedbackModel=feedbackModel
