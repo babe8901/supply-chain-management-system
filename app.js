@@ -154,8 +154,17 @@ app
         }
         if(user["email"]==username && bcrypt.compareSync(password, user["password"]))
         {
+          if (user["utype"] == "user") {
             req.session.user = user;
             res.redirect("/user-dashboard");
+          } else if (user["type"] == "transporter") {
+            req.session.user = user;
+            res.redirect("/transporter-dashboard");
+          } else {
+            req.session.user = user;
+            res.redirect("/admin-dashboard");
+          }
+            
         }
         else{
             console.log("email and password are not matching..")
@@ -167,6 +176,21 @@ app
     }
   });
 
+app.get("/admin-dashboard/messages", async(req, res) => {
+  try {
+    if (req.session.user) {
+      count = await feedbackModel.count()
+      msg = await feedbackModel.find().sort({"datetime" : -1 })
+      res.render("messages", {
+        msg : msg
+      })
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
 
 app
 	.get("/contactus", sessionChecker, (req, res) => {
@@ -283,6 +307,22 @@ app.get("/delete_transaction/:id",async(req,res)=>{
     }
     
     
+})
+
+app.get("/admin-dashboard/messages/delete-message/:id", async(req, res) => {
+  try {
+    if (req.session.user) {
+      await feedbackModel.deleteOne({ _id : req.params.id }).then(
+        result => {
+          res.redirect("/admin-dashboard/messages")
+        }
+      )
+    } else {
+      res.redirect("/login")
+    }
+  } catch(err) {
+    console.log(err)
+  }
 })
 
 
@@ -438,7 +478,6 @@ app.get("/buy-now/:id",async(req,res)=>{
          res.render("buy-now",{
            product:buy_new_product,
            user:user
-
          })
      }
      else{
