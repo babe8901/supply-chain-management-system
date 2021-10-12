@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="http://localhost:3000/tailwind.css">
     <script src="http://localhost:3000/chart.bundle.min.js"></script>
-    <title>Messages</title>
+    <title>Orders</title>
 
     <style>
         .bg-black-alt  {
@@ -74,13 +74,13 @@
                     </a>
                 </li>
                 <li class="mr-6 my-2 md:my-0">
-                    <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-purple-400 no-underline hover:text-gray-100 border-b-2 border-purple-400 hover:border-purple-400">
-                        <i class="fa fa-envelope fa-fw mr-3 text-purple-400"></i><span class="pb-1 md:pb-0 text-sm">Messages</span>
+                    <a href="http://localhost:3000/admin-dashboard/messages" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900  hover:border-purple-400">
+                        <i class="fa fa-envelope fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Messages</span>
                     </a>
                 </li>
                 <li class="mr-6 my-2 md:my-0">
-                    <a href="http://localhost:3000/admin-dashboard/orders" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900  hover:border-green-400">
-                        <i class="fas fa-chart-area fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Orders</span>
+                    <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-green-400 no-underline hover:text-gray-100 border-b-2 border-green-400 hover:border-green-400">
+                        <i class="fas fa-chart-area fa-fw mr-3 text-green-400"></i><span class="pb-1 md:pb-0 text-sm">Orders</span>
                     </a>
                 </li>
                 <li class="mr-6 my-2 md:my-0">
@@ -103,31 +103,115 @@
         
     </div>
 </nav>
-    <div class="container items-center w-full mx-auto pt-32 pl-56">
-        <% for (let i = 0; i < count; i++) { %>
-        <div class="max-w-screen-lg py-4 px-8 bg-white shadow-lg rounded-lg my-20">
-            <div class="flex justify-center md:justify-end -mt-16">
-                <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80">
-            </div>
-            <div>
-                <h2 class="text-gray-800 text-3xl font-semibold"><%=msg[i]["f_name"]%> <%=msg[i]["l_name"]%></h2>
-                <p class="mt-2 text-gray-600"><%=msg[i]["feedback"]%></p>
-            </div>
-            <div class="flex justify-end mt-4">
-                <p class="text-xl font-medium text-indigo-500"><%=msg[i]["datetime"]%></p>
-            </div>
-            <div>
-                <a href="http://localhost:3000/admin-dashboard/messages/delete-message/<%= msg[i]["_id"] %>"><i class="fas fa-trash"></i></a>
-            </div>
-        </div>
-            <% } %>
-    </div>
 
+<!-- <div
+      class="hidden bg-white border-0 mb-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg"
+      id="tooltip-example">
+      <div>
+        <div class="bg-white text-gray opacity-75 p-3 mb-0 border border-solid uppercase rounded">
+          Hi. I am tooltip.
+        </div>
+      </div>
+    </div> -->
+
+<div class="container items-center w-full mx-auto pt-32 pl-10 pr-10">
+    <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Product
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Amount
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Date
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                    </th>
+                    <th scope="col" class="relative px-6 py-3">
+                        <span class="sr-only">Delete</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <% for (let i = 0; i < orders_count; i++) { %> 
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="flex-shrink-0 h-10 w-10">
+                          <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                        </div>
+                        <div class="ml-4">
+                          <div class="text-sm text-center font-medium text-gray-900">
+                            <%= orders[i]["user"] %> 
+                          </div>
+                          <div class="text-sm text-center text-gray-500">
+                            <%= orders[i]["userid"] %> 
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-center text-gray-900"><%= orders[i]["product"] %></div>
+                    </td>
+                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                      <span class="px-2 inline-flex text-xl leading-5 font-semibold rounded-full">
+                        <%= orders[i]["price"] %> X <%= orders[i]["quantity"] %> = <%= orders[i]["amount"] %> 
+                      </span>
+                    </td>
+                    <td class="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
+                        <%= orders[i]["date"] %> 
+                    </td>
+                    <td class="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
+                        <% if (orders[i]["status"] == "done" ) { %> 
+                            <i class="fas fa-check-circle text-green-600"></i>
+                        <% } else if (orders[i]["status"] == "pending") { %> 
+                            <button type="button" onmouseenter="openPopover(event,'tooltip-example')" onmouseleave="openPopover(event,'tooltip-example')">
+                                <a href="http://localhost:3000/admin-dashboard/orders/order-completed/<%=orders[i]["_id"]%>" class="text-gray-600 hover:text-green-600"><i class="fas fa-check-circle"></i></i></a>
+                            </button>
+                        <% } else { %>
+                            <%= orders[i]["status"] %>
+                        <% } %>  
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a href="http://localhost:3000/admin-dashboard/orders/delete-order/<%=orders[i]["_id"]%>" class="text-gray-600 hover:text-red-500"><i class="fas fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="flex flex-wrap">
+    <div class="w-full text-center">
+      <div
+        class="hidden bg-white-30- border-0 mb-3 block z-50 font-normal leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg"
+        id="tooltip-example">
+        <div>
+          <div class="bg-white font-bold text-green-600 opacity-50 p-3 mb-0 border border-solid uppercase rounded" style="font-size: 10px;">
+            Mark as completed
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
     <script>
-	
-	
-        /*Toggle dropdown list*/
-        /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
     
         var userMenuDiv = document.getElementById("userMenu");
         var userMenu = document.getElementById("userButton");
@@ -177,8 +261,20 @@
           }
           return false;
         }
-    
-    
     </script>
+
+    <script src="http://localhost:3000/popper.js"></script>
+    <script>
+        function openPopover(event, tooltipID) {
+          let element = event.target;
+          while (element.nodeName !== "BUTTON") {
+            element = element.parentNode;
+          }
+          var popper = Popper.createPopper(element, document.getElementById(tooltipID), {
+            placement: 'top'
+          });
+          document.getElementById(tooltipID).classList.toggle("hidden");
+        }
+      </script>
 </body>
 </html>
