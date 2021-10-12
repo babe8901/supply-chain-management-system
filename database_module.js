@@ -110,10 +110,10 @@ const message = new mongoose.Schema({
     "how_to_contact" : String,
     "feedback" : String,
     "datetime" : {type : Date, default : Date.now}
-}, {collection : "feedback"})
+}, {collection : "message"})
 
-const feedbackModel = mongoose.model("message", feedback)
-module.exports.messageModel = feedbackModel
+const messageModel = mongoose.model("message", message)
+module.exports.messageModel = messageModel
 //-------------------------------------------------- FEEDBACK SCHEMA -------------------------
 const feedback=new mongoose.Schema({
     "user":String,
