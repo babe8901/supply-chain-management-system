@@ -244,6 +244,17 @@ app.get("/user-dashboard", async(req, res) => {
 //----------------------------------------------------------ROUTE FOR ADMIN'S DASHBOARD------------------------------------------------------------
 app.get("/admin-dashboard", async(req, res) => {
 	// console.log(user, "user-dashboard login")
+  try{
+     if(req.session.user && req.cookies.user_sid){
+         res.render("admin-dashboard")
+     }
+     else{
+       res.redirect("/login")
+     }
+  }
+  catch(err){
+    console.log(err)
+  }
 	res.sendFile(path.join(__dirname,"/templates/admin.html"))
 });
 
@@ -668,18 +679,17 @@ app.post("/feedback/:id",(req,res)=>{
 })
 
 //---------------------------------------------------------- ALL REVIEWS ---------------------------
-app.get("/review/:id",async(req,res)=>{
+app.get("/user-dashboard/review/:id",async(req,res)=>{
   try{
       if(req.session.user && req.cookies.user_sid){
-         product_id=req.params.id
-         review=await feedbackModel.find({"product_id":req.params.id});
-         product=await productModel.find({"_id":req.params.id})
+        
+        review=await feedbackModel.find({"product_id":req.params.id})
+        product=await productModel.find({"_id":req.params.id})
          res.render("product",{
            review:review,
-           user:user,
            product:product
            
-         })
+          })
       }
       else{
         res.redirect("/login")
