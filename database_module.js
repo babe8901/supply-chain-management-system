@@ -116,9 +116,13 @@ const messageModel = mongoose.model("message", message)
 module.exports.messageModel = messageModel
 //-------------------------------------------------- FEEDBACK SCHEMA -------------------------
 const feedback=new mongoose.Schema({
-    "user":String,
+    "userName":String,
     "product_id":String,
-    "feedback":String
+    "feedback":String,
+    "date":{
+        type:Date,
+        default:Date.now
+    }
 },{collection:"feedback"})
 
 const feedbackModel=mongoose.model("feedback",feedback)

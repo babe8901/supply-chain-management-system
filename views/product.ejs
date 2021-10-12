@@ -52,6 +52,7 @@ top: 20px;
 }.container .product .col-1 a:hover{
 background-color: white;
 color: red;
+border: 1px solid red;
 
 }
 .container .product .col-1 i{
@@ -94,6 +95,7 @@ color: red;
     background-color: white;
     cursor: pointer;
     color: red;
+    
 }
 #col-1{
 padding: 200px 30px;
@@ -117,7 +119,7 @@ padding: 200px 30px;
     <div class="container">
          <div class="product">
              <div class="col-1">
-                   <img src="<%=product['image']%>" alt="">
+                   <img src="http://localhost:3000/<%=product['image']%>" alt="">
              </div>
              <div class="col-1" id="col-1">
                   <h3>HOME/<%=product['type']%></h3>
@@ -133,7 +135,7 @@ padding: 200px 30px;
                 <h4>Description</h4>
                 <p><%=product['description']%></p>
                 <a href="http://localhost:3000/user-dashboard"><span>&#8592;</span>Back</a><span></span><a href="http://localhost:3000/buy-now/<%=product['_id']%>">Buy<span>&#8594;</span></a></span>
-                <div class="feedback"><a href="#feedback" id="feedback"><span></span>Give feedback</a><span></span><a id="review" href="http://localhost:3000/user-dashboard/review/<%=product['title']%>">All review<span></span></a></span>   </div>
+                <div class="feedback"><a href="#feedback" id="feedback"><span></span>Give feedback</a><span></span><a id="review" href="http://localhost:3000/user-dashboard/review/<%=product['id']%>">All review<span></span></a></span>   </div>
                 <form id="form" method="post" action="http://localhost:3000/feedback/<%=product['_id']%>">
                     <label for="feedback">Give your valuable feedback</label>
                     <input type="text" i="feedback" name="feedback" placeholder="Give feedback">

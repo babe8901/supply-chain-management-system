@@ -660,7 +660,7 @@ app.post("/feedback/:id",(req,res)=>{
        var product_id=req.params.id
        console.log("Hello Product is",product_id)
        newRecord=new feedbackModel({
-         user:username,
+         userName:user['name'],
          product_id:product_id,
          feedback:req.body.feedback
        })
@@ -683,13 +683,12 @@ app.get("/user-dashboard/review/:id",async(req,res)=>{
   try{
       if(req.session.user && req.cookies.user_sid){
         
-        review=await feedbackModel.find({"product_id":req.params.id})
-        product=await productModel.find({"_id":req.params.id})
-         res.render("product",{
-           review:review,
-           product:product
-           
-          })
+         review=await feedbackModel.find({"product_id":req.params.id})
+         res.render("review",{
+           review:review
+        
+         })
+      
       }
       else{
         res.redirect("/login")
