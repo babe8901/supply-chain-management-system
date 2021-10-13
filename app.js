@@ -193,6 +193,123 @@ app.get("/admin-dashboard/messages", async(req, res) => {
   }
 })
 
+app.get("/admin-dashboard/payments", async(req, res) => {
+  try {
+    if (req.session.user) {
+      payments_count = await transactionModel.count()
+      payments = await transactionModel.find().sort({ "date" : -1 })
+      res.render("payments", {
+        payments : payments,
+        payments_count : payments_count
+      })
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.get("/admin-dashboard/payments/delete-record/:id", async(req, res) => {
+  try {
+    if (req.session.user) {
+      await transactionModel.deleteOne({ _id : req.params.id }).then(
+        result => {
+          res.redirect("/admin-dashboard/payments")
+        }
+      )
+    } else {
+      res.redirect("/login")
+    }
+  } catch(err) {
+    console.log(err)
+  }
+})
+
+app.get("/admin-dashboard/manage", async(req, res) => {
+  try {
+    if (req.session.user) {
+      users_count = await userModel.count()
+      users = await userModel.find().sort({ "utype" : 1,  "name" : 1 })
+      res.render("manage", {
+        users : users,
+        users_count : users_count
+      })
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.get("/admin-dashboard/manage/delete-account/:id", async(req, res) => {
+  try {
+    if (req.session.user) {
+      await userModel.deleteOne({ _id : req.params.id }).then(
+        result =>{
+          res.redirect("/admin-dashboard/manage")
+        }
+      )
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.get("/admin-dashboard/orders", async(req, res) => {
+  try {
+    if (req.session.user) {
+      orders_count = await orderedModel.count()
+      orders = await orderedModel.find().sort({ "time" : -1 })
+      res.render("orders", {
+        orders : orders,
+        orders_count : orders_count
+      })
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.get("/admin-dashboard/orders/order-completed/:id", async(req, res) => {
+  try {
+    if (req.session.user) {
+      await orderedModel.findOneAndUpdate({ _id : req.params.id }, {
+        $set : {
+          status : "done"
+        }
+      }).then(
+        result => {
+          res.redirect("/admin-dashboard/orders")
+        }
+      )
+    } else {
+      res.redirect("/login")
+    }
+  } catch(err) {
+    console.log(err)
+  }
+})
+
+app.get("/admin-dashboard/orders/delete-order/:id", async(req, res) => {
+  try {
+    if (req.session.user) {
+      await orderedModel.deleteOne({ _id : req.params.id }).then(
+        result => {
+          res.redirect("/admin-dashboard/orders")
+        }
+      )
+    } else {
+      res.redirect("/login")
+    }
+  } catch(err) {
+    console.log(err)
+  }
+})
+
 app
 	.get("/contactus", sessionChecker, (req, res) => {
     res.sendFile(path.join(__dirname,"/templates/contactus.html"))
@@ -246,7 +363,12 @@ app.get("/admin-dashboard", async(req, res) => {
 	// console.log(user, "user-dashboard login")
   try{
      if(req.session.user && req.cookies.user_sid){
-         res.render("admin-dashboard")
+       user_count = await userModel.count()
+      //  revenue = transactionModel.aggregate([{total : { $sum : "$amount"}}])
+      //  console.log(revenue)
+         res.render("admin-dashboard", {
+           user_count : user_count
+         })
      }
      else{
        res.redirect("/login")
