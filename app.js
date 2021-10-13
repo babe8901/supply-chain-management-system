@@ -627,14 +627,18 @@ app.post("/buy-now",async(req,res)=>{
   try{
      if(req.session.user && req.cookies.user_sid){
       data=req.body;
-      console.log(data,"Majnu bhai")
-      var account=await accountModel.findOne({"user_id":data["email"]}).exec();
+      console.log(data['email'],"Majnu bhai")
+      var account=await accountModel.findOne({"bank_user_id":data["email"]}).exec();
       
-      paidAmount=buy_new_product['price']*data['quantity']
+      console.log(account,"This is account")
       //Update User Balance.........................
-      if(buy_new_product['quantity']>0){
 
+      if(account){
+     
       
+      if(buy_new_product['quantity']>data['quantity']){
+
+        paidAmount=buy_new_product['price']*data['quantity']
       if(account['balance']>=paidAmount){
         
     
@@ -722,8 +726,12 @@ app.post("/buy-now",async(req,res)=>{
       }
     }
     else{
-      res.redirect("Sorry but product is not avaiable in stock")
+      res.send("Sorry but product is not avaiable in stock")
     }
+  }
+  else{
+    res.send("Invalid Account")
+  }
      }
     else{
       res.redirect("/login")
