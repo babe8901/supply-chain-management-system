@@ -20,7 +20,7 @@ html{
 	height: 80px;
     margin-top: 30px;
 	display:flex;
-	background-color: #546e88;
+	background:linear-gradient(#042331,#194255);
 	border-radius: 10px;
 	opacity: 0.8;
 	position:fixed
