@@ -8,6 +8,7 @@ var bcrypt=require("bcrypt")
 var path=require("path")
 const ejs=require("ejs")
 const express=require("express");
+const multer = require("multer")
 const { urlencoded } = require("body-parser");
 const app=express();
 
@@ -35,6 +36,11 @@ var product=""
 var buy_new_product=""
 var temp1=""
 var temp2=""
+
+var fs = require('fs');
+const { title } = require("process");
+const { type } = require("os");
+var filePath = `C:/Users/lucky/Desktop/SEM 5/ADBMS/express-app/SCMS/uploads/`; 
 
 // Set View Engion---------------------------------------------------------------------
 app.set("view engine","ejs");
@@ -90,7 +96,20 @@ app.use((req, res, next) => {
     }
   };
 
+  //Code for multer
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage })
 
+
+app.use(express.static(__dirname + '/public'));
+app.use('/uploads', express.static('uploads'));
 
 //----------------------------------------------------------ROUTE FOR HOME PPAGE------------------------------------------------------------
 app.get("/", sessionChecker, (req, res) => {
@@ -227,6 +246,52 @@ app.get("/admin-dashboard/payments/delete-record/:id", async(req, res) => {
     console.log(err)
   }
 })
+
+app.get("/admin-dashboard/add-product", async(req, res) => {
+  try {
+    if (req.session.user) {
+      res.render("add-product")
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.post("/admin-dashboard/add-product", upload.single('image'), async(req, res, next) => {
+  try {
+    if (req.session.user) {
+      console.log(JSON.stringify(req.file))
+      // var response = '<a href="/">Home</a><br>'
+      // response += "Files uploaded successfully.<br>"
+      // response += `<img src="http://localhost:3000/${req.file.path}" /><br>`
+
+      const product = new productModel({
+        title : req.body.title,
+        type : req.body.type,
+        image : req.file.filename,
+        description : req.body.description,
+        price : req.body.price,
+        quantity : req.body.quantity
+      })
+      product.save((err, docs) => {
+        if (err) {
+          res.redirect("/admin-dashboard/add-product")
+        } else {
+          console.log(docs)
+          res.redirect("/admin-dashboard/stock")
+        }
+      })
+    return res.send(response)
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 //------------------------------------------------------ ROUTE FOR ADMIN MANAGE --------------------------------------------
 app.get("/admin-dashboard/manage", async(req, res) => {
   try {
@@ -261,11 +326,10 @@ app.get("/admin-dashboard/manage/delete-account/:id", async(req, res) => {
   }
 })
 
-app.get("/admin-dashboard/manage/edit-account/:email", async (req, res) => {
+app.get("/admin-dashboard/manage/edit-account/:id", async (req, res) => {
   try {
-    // u_id = req.params.id
     if (req.session.user) {
-      data = await userModel.findOne({ email : req.params.email })
+      data = await userModel.findOne({ _id : req.params.id })
       res.render("edit-account", {
         data : data
       })
@@ -279,22 +343,128 @@ app.get("/admin-dashboard/manage/edit-account/:email", async (req, res) => {
 
 app.post("/admin-dashboard/manage/edit-account", async (req, res) => {
   try {
-    console.log(req.body)
     if (req.session.user) {
-      console.log(await userModel.findOne({ _id : req.body.id }))
-      await userModel.findOneAndUpdate({ "email" :  req.body.email}, {
+      // console.log(req.body)
+      // console.log(await userModel.findOne({ _id : req.body.id }))
+      new_password = req.body.password
+      temp = await userModel.findOne({_id : req.body.id})
+      old_password = temp['password']
+      console.log(new_password + " " + old_password)
+      // temp = 
+      if (new_password != old_password) {
+        new_password = bcrypt.hashSync(new_password, 10)
+      }
+
+      await userModel.findOneAndUpdate({ _id :  req.body.id}, {
         $set : {
           name : req.body.name,
           mobile : req.body.mobile,
           address : req.body.address,
           gender : req.body.gender,
-          password : bcrypt.hashSync(req.body.password, 10)
+          password : new_password
         }
       }).then(
         result => {
           res.redirect("/admin-dashboard/manage")
         }
       )
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+//-------------------------------------------------------------ADMIN STOCK----------------------------------
+
+app.get("/admin-dashboard/stock", async(req, res) => {
+  try {
+    if (req.session.user) {
+      products_count = await productModel.count()
+      products = await productModel.find().sort({ "type" : 1, "title" : 1})
+      res.render("stock", {
+        products : products,
+        product_count : products_count
+      })
+    } else {
+      res.redirect("/login")
+    }
+  } catch(err) {
+    console.log(err)
+  }
+})
+
+app.get("/admin-dashboard/stock/delete-stock/:id", async(req, res) => {
+  try {
+    if (req.session.user) {
+      temp = await productModel.findOne({ _id : req.params.id })
+
+      fs.unlinkSync(filePath + temp["image"]);
+      await productModel.deleteOne({ _id : req.params.id }).then(result => {
+        res.redirect("/admin-dashboard/stock")
+      }).catch(err => {
+        res.send(err)
+      })
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.get("/admin-dashboard/stock/edit-stock/:id", async(req, res) => {
+  try {
+    if (req.session.user) {
+      data = await productModel.findOne({ _id : req.params.id })
+      res.render("edit-stock", {
+        data : data
+      })
+    } else {
+      res.redirect("/login")
+    }
+  } catch(err) {
+    console.log(err)
+  }
+})
+
+app.post("/admin-dashboard/stock/edit-stock",(req) => {
+  if (req.file.size != 0 ) {
+    upload.single('image')
+  }} , async(req, res) => {
+  try{
+    if (req.session.user) {
+      temp = await productModel.findOne({ _id : req.body.id })
+      console.log(temp)
+      console.log(JSON.stringify(req.file))
+      if (req.file.size != 0) {
+        fs.unlinkSync(filePath + temp["image"]);
+        await productModel.findOneAndUpdate({ _id : req.body.id }, {
+          $set : {
+            title : req.body.title,
+            type : req.body.type,
+            description : description,
+            quantity : req.body.quantity,
+            price : req.body.price,
+            image : req.file.filename
+          }
+        }).then(result => {
+          res.redirect("/admin-dashboard/stock")
+        })
+      } else {
+        await productModel.findOneAndUpdate({ _id : req.body.id }, {
+          $set : {
+            title : req.body.title,
+            type : req.body.type,
+            description : description,
+            quantity : req.body.quantity,
+            price : req.body.price
+          }
+        }).then(result => {
+          res.redirect("/admin-dashboard/stock")
+        })
+      }
     } else {
       res.redirect("/login")
     }

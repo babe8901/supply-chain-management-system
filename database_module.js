@@ -1,6 +1,9 @@
 
 const mongoose=require("mongoose");
-var url = "mongodb://localhost:27017/supplyChainManagement";
+
+const username = "user";
+const password = "user";
+var url = `mongodb+srv://${username}:${password}@nodejsapp.h5ec5.mongodb.net/supplyChainManagement?retryWrites=true&w=majority`;
 
 mongoose.connect(url,{useNewUrlParser:true,useUnifiedTopology:true})
 .then(()=>console.log("Connected to database.."))
