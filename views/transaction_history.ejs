@@ -10,7 +10,16 @@
     <link rel="stylesheet" href="user-dashboard.css">
 		<link rel="stylesheet" href="table.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ">
-</head>
+      <style>
+          .section h1{
+              color: brown;
+              text-align: center;
+              margin-top:100px;
+              margin-left: 400px;
+
+          }
+      </style>
+    </head>
 <body>
   
     <div class="container">
@@ -29,7 +38,15 @@
             </div>
         </div>
         <div class="section">
-           
+               <%if(transaction.length==0){
+
+                %>
+                     <h1>No Transaction till now..</h1>
+                <%
+               }else{
+
+                %>
+              
             
     
                
@@ -60,7 +77,7 @@
                           </table>
                       </div>
          
-
+                     <%}%>
      
 
     </div>

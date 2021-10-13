@@ -510,6 +510,9 @@ app.post("/buy-now",async(req,res)=>{
       
       paidAmount=buy_new_product['price']*data['quantity']
       //Update User Balance.........................
+      if(buy_new_product['quantity']>0){
+
+      
       if(account['balance']>=paidAmount){
         
     
@@ -526,10 +529,7 @@ app.post("/buy-now",async(req,res)=>{
          
 
         //Update Quantity of Product..........
-        if(buy_new_product['quantity']<data['quantity']){
-          res.send("Product is not avaiable in stock....")
-        }
-        else{
+        
           await productModel.findOneAndUpdate({"_id":buy_new_product['_id']},{
             $set:{
               quantity:buy_new_product['quantity']-data['quantity']
@@ -557,8 +557,7 @@ app.post("/buy-now",async(req,res)=>{
               })
             }
           }
-          
-        }
+ 
 
       
         // Set Transaction History to database.....................
@@ -599,6 +598,10 @@ app.post("/buy-now",async(req,res)=>{
       else{
         res.send("Insufficient Amount..")
       }
+    }
+    else{
+      res.redirect("Sorry but product is not avaiable in stock")
+    }
      }
     else{
       res.redirect("/login")

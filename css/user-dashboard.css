@@ -16,7 +16,7 @@
 	height: 80px;
     
 	display:flex;
-	background-color: #546e88;
+	background:linear-gradient(#042331,#194255);
 	
 	opacity: 0.8;
 	position:fixed

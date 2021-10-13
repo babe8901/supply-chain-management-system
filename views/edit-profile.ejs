@@ -25,7 +25,7 @@
                         <input type="text" value="<%=user['email']%>" placeholder="email" id="email" name="email" required>
 						
 					    <p id="pass-verify"></p>
-						<select name="utype" value="<%=user['utype']%>" id="user-type" required>
+						<select type="hidden" name="utype" value="<%=user['utype']%>" id="user-type" required>
 						    <option selected="true" disabled="disabled" value="">user type</option>
 							
 							<option value="transporter">Transporter</option>
