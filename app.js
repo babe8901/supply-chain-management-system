@@ -27,6 +27,7 @@ const { ObjectId } = require("bson");
 const { now } = require("mongoose");
 const { resolveNaptr } = require("dns");
 const { readdirSync } = require("fs");
+const { stringify } = require("querystring");
 const port=3000;
 var username=""
 var user=""
@@ -259,6 +260,49 @@ app.get("/admin-dashboard/manage/delete-account/:id", async(req, res) => {
     console.log(err)
   }
 })
+
+app.get("/admin-dashboard/manage/edit-account/:email", async (req, res) => {
+  try {
+    // u_id = req.params.id
+    if (req.session.user) {
+      data = await userModel.findOne({ email : req.params.email })
+      res.render("edit-account", {
+        data : data
+      })
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.post("/admin-dashboard/manage/edit-account", async (req, res) => {
+  try {
+    console.log(req.body)
+    if (req.session.user) {
+      console.log(await userModel.findOne({ _id : req.body.id }))
+      await userModel.findOneAndUpdate({ "email" :  req.body.email}, {
+        $set : {
+          name : req.body.name,
+          mobile : req.body.mobile,
+          address : req.body.address,
+          gender : req.body.gender,
+          password : bcrypt.hashSync(req.body.password, 10)
+        }
+      }).then(
+        result => {
+          res.redirect("/admin-dashboard/manage")
+        }
+      )
+    } else {
+      res.redirect("/login")
+    }
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 //--------------------------------------------------------------ADMIN ORDERS---------------------------------
 
 app.get("/admin-dashboard/orders", async(req, res) => {
