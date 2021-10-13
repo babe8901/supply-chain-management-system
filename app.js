@@ -177,7 +177,9 @@ app
     }
   });
 
-app.get("/admin-dashboard/messages", async(req, res) => {
+ // --------------------------------------------------------- ROUTE FOR ADMIN MESSAGES FROM USER --------------------
+
+ app.get("/admin-dashboard/messages", async(req, res) => {
   try {
     if (req.session.user) {
       count = await messageModel.count()
@@ -193,6 +195,7 @@ app.get("/admin-dashboard/messages", async(req, res) => {
   }
 })
 
+// --------------------------------------------------------- ROUTE FOR AADMIN PAYMENT ----------------------------------
 app.get("/admin-dashboard/payments", async(req, res) => {
   try {
     if (req.session.user) {
@@ -207,7 +210,7 @@ app.get("/admin-dashboard/payments", async(req, res) => {
     console.log(err)
   }
 })
-
+//-----------------------------------------------------------------------------ROUTE FOR ADMIN RECORD DELETE ----------------------------
 app.get("/admin-dashboard/payments/delete-record/:id", async(req, res) => {
   try {
     if (req.session.user) {
@@ -223,7 +226,7 @@ app.get("/admin-dashboard/payments/delete-record/:id", async(req, res) => {
     console.log(err)
   }
 })
-
+//------------------------------------------------------ ROUTE FOR ADMIN MANAGE --------------------------------------------
 app.get("/admin-dashboard/manage", async(req, res) => {
   try {
     if (req.session.user) {
@@ -256,6 +259,7 @@ app.get("/admin-dashboard/manage/delete-account/:id", async(req, res) => {
     console.log(err)
   }
 })
+//--------------------------------------------------------------ADMIN ORDERS---------------------------------
 
 app.get("/admin-dashboard/orders", async(req, res) => {
   try {
@@ -273,7 +277,7 @@ app.get("/admin-dashboard/orders", async(req, res) => {
     console.log(err)
   }
 })
-
+//--------------------------------------------------------------------------- ADMIN COMPLETED ORDER ----------------------
 app.get("/admin-dashboard/orders/order-completed/:id", async(req, res) => {
   try {
     if (req.session.user) {
@@ -310,6 +314,7 @@ app.get("/admin-dashboard/orders/delete-order/:id", async(req, res) => {
   }
 })
 
+//------------------------------------------------------- ROUTE FOR CONTACT US ------------------------------------
 app
 	.get("/contactus", sessionChecker, (req, res) => {
     res.sendFile(path.join(__dirname,"/templates/contactus.html"))
