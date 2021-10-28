@@ -7,19 +7,19 @@
     <title>Slide Bar</title>
     <link rel="stylesheet" href="style.css">
     <link rel = "icon" href = 
-"../image/bd7da51c-5529-4aeb-8df4-a441cebc5abc.jpg" 
+"https://cdn4.iconfinder.com/data/icons/e-commerce-color-line-vol-1/512/INVENTORY_MANAGEMENT-512.png" 
         type = "image/x-icon">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body>
 
-        
+
         <div class="container">
             
             <header class="header">
                 <div class="navbar">
-                    <div class="logo">
-                        <h1>Supply<span>Shopping </span>Management</h1>
+                    <div class="logo" >
+                        <h1 style="font-size:40px;">Supply <span>Chain </span>Management <span>System</span>
              
                     </div>
                     <div class="search">
@@ -38,40 +38,44 @@
                 <center>
                     
                     <img src="download.jpg" alt="">
-                    <p> <%=user['name']%></p>
-                    <p> <%=user['mobile']%></p>
+ 
                 </center> 
                 <ul id="ul">
                     
-                    <li><a href="http://localhost:3000/profile?username=<%=user['email']%>"><i class="fas fa-users"></i>Profile</a></li>
-                    <li><a href="http://localhost:3000/transaction_history"><i class="fas fa-history"></i>Transaction Histroy</a></li>
-                    <li><a href="http://localhost:3000/carts"><i class="fas fa-cart-plus"></i>Carts</a></li>
-                    <li><a href="http://localhost:3000/ordered_product"><i class="fab fa-product-hunt"></i>Ordred Product</a></li>
-               
+                    <li><a href="http://localhost:3000/profile"><i class="fas fa-users"></i>Profile</a></li>
+                    <li><a href="http://localhost:3000/transaction_history"><i class="fas fa-history"></i>Task</a></li>
+                    <li><a href="http://localhost:3000/carts"><i class="fas fa-cart-plus"></i>Completed task</a></li>
+                  
                     <li id="logout"><a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i>logout</a></li>
                 </ul>
               </div>
               <div class="content">
-                <div class="second" >
-                    <img src="https://mycredible.info/home/assests/img/secure.png" alt="profile image">
-               </div>
-                  <div class="first" id="first" >
-                     
-                    <h1><%=user["name"]%></h1>
-                    <p><span class="bold">Contact No:</span><%=user["mobile"]%></p>
-                    <p><span class="bold">Email Id:</span><%=user["email"]%></p>
-                    <p><span class="bold">User Type:</span><%=user["utype"]%></p>
-                    <p> <span class="bold">Gender:</span><%=user["gender"]%></p>
-                    </p><span class="bold">Address:</span><%=user["address"]%></p>
-                       <a href="http://localhost:3000/edit-profile?email=<%=user['email']%>">Edit profile</a>
+                  <div class="first">
+                      <h3>E‑COMMERCE & RETAIL MARKETING</h3>
+                       <h1>Marketing that drives e‑commerce success</h1>
+                       <p>Whether you’re getting online for the first time or scaling, Mailchimp has tools and insights to help you sell more stuff.</p>
+                       <a href="">Join Us</a>
                   </div>
-                  
+                  <div class="second">
+                       <img src="pexels-photo-5632402.jpeg" alt="">
+                  </div>
                 
               </div>
              
               </div>
-</div>
-             
+
+
+        <!-- ------------------------------------------footer------------------------------------------ -->
+
+        <div class="footer">
+            <p>copyrigt 2021 @ Neeraj Yadav and shubham yadav</p>
+        </div>
+
+
+
+        </div>
+ 
+   
     <script src="interact.js"></script>
 </body>
 </html>

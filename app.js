@@ -67,7 +67,7 @@ app.use(
         resave:false,
         saveUninitialized:false,
         cookie:{
-            expires:6000000
+            expires:600000
         }
     })
 )
@@ -158,9 +158,10 @@ app
           if (user["utype"] == "user") {
             req.session.user = user;
             res.redirect("/user-dashboard");
-          } else if (user["type"] == "transporter") {
+          } else if (user["utype"] == "transporter") {
             req.session.user = user;
-            res.redirect("/transporter-dashboard");
+            console.log("Hello Transporter")
+            res.redirect("/transporter");
           } else {
             req.session.user = user;
             res.redirect("/admin-dashboard");
@@ -833,6 +834,21 @@ app.get("/user-dashboard/review/:id",async(req,res)=>{
       }
   }catch(err){
     console.log(err)
+  }
+})
+
+//----------------------------------------------------------- TRANSPORTER ----------------------------------
+app.get("/transporter",(req,res)=>{
+  try{
+    if(req.session.user && req.cookies.user_sid){
+        res.render("transporter");
+    }
+    else{
+      res.redirect("/login");
+    }
+   
+  }catch(err){
+    console.log(err);
   }
 })
   // route for handling 404 requests(unavailable routes)
