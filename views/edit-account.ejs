@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
+    <title>Edit</title>
     <meta name="description" content="">
 
-    <link href="tailwind.min.css" rel="stylesheet">
+    <link href="http://localhost:3000/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
         .body-bg {
@@ -26,57 +26,53 @@
     <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
         <section>
             <h3 class="font-bold text-2xl">Welcome to Supply Chain Management System</h3>
-            <p class="text-gray-600 pt-2">Sign up</p>
+            <p class="text-gray-600 pt-2">Edit User Details</p>
         </section>
 
         <section class="mt-10">
-            <form class="flex flex-col" method="POST" action="http://localhost:3000/register">
+            <form class="flex flex-col" method="POST" action="http://localhost:3000/admin-dashboard/manage/edit-account">
+                <div>
+                    <input type="hidden" name="id" value="<%= data["_id"] %>">
+                </div>
                 <div class="mb-6 pt-3 rounded bg-gray-200">
                     <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">Full Name</label>
-                    <input type="text" id="name" name="name" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
+                    <input type="text" id="name" name="name" value="<%= data["name"] %>" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
                 </div>
                 <div class="mb-6 pt-3 rounded bg-gray-200">
                     <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="mob">Mobile No</label>
-                    <input type="text" id="mobile" name="mobile" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
+                    <input type="text" id="mobile" name="mobile" value="<%= data["mobile"] %>" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
                 </div>
                 <div class="mb-6 pt-3 rounded bg-gray-200">
                     <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">Email</label>
-                    <input type="text" id="email" name="email" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
+                    <input type="text" id="email" name="email" value="<%= data["email"] %>" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
                 </div>
                 <div class="mb-6 pt-3 rounded bg-gray-200">
                     <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="password">Password</label>
-                    <input type="password" id="password" name="password" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
+                    <input type="password" id="password" name="password" value="<%= data["password"] %>" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
                 </div>
                 <div class="mb-6 pt-3 rounded bg-gray-200">
                     <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">Address</label>
-                    <input type="text" id="address" name="address" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
+                    <input type="text" id="address" name="address" value="<%= data["address"] %>" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" required>
                 </div>
                 <div>
-                   <input type="hidden" name="utype" value="user">
+                   <input type="hidden" name="utype" value="<%= data["utype"] %>">
                 </div>
                 <br>
                 <div>
                     <label class="block text-left" style="max-width: 400px;">
                         <select class="form-select block w-full mt-1" id="gender" name="gender" required>
                             <option selected="true" disabled="disabled" value="">Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
+                            <option value="male" <% if (data["gender"] == "male") { %> selected="true" {<% } %> } >Male</option>
+                            <option value="female" <% if (data["gender"] == "female") { %> selected="true" {<% } %> >Female</option>
+                            <option value="other" <% if (data["gender"] == "other") { %> selected="true" {<% } %> >Other</option>
                         </select>
                     </label>
                 </div>
                 <br>
-                <div class="flex justify-end">
-                    <a href="http://localhost:3000/forgot-password" class="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-6">Forgot your password?</a>
-                </div>
-                <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign Up</button>
+                <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Edit</button>
             </form>
         </section>
     </main>
-
-    <div class="max-w-lg mx-auto text-center mt-12 mb-6">
-        <p class="text-white">Already have an account? <a href="http://localhost:3000/login" class="font-bold hover:underline">Sign in</a>.</p>
-    </div>
 
     <footer class="max-w-lg mx-auto flex justify-center text-white">
         <a href="http://localhost:3000/contactus" class="hover:underline">Contact</a>

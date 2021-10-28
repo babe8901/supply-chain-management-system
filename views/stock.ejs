@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage</title>
+    <title>Add Product</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="http://localhost:3000/tailwind.css">
-    <script src="chart.bundle.min.js"></script>
-
     <style>
 		.bg-black-alt  {
 			background:#191919;
@@ -70,25 +68,25 @@
                             <i class="fas fa-home fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Home</span>
                         </a>
                     </li>
-					          <li class="mr-6 my-2 md:my-0">
-                        <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-pink-400 no-underline hover:text-gray-100 border-b-2 border-pink-400 hover:border-pink-400">
-                            <i class="fas fa-tasks fa-fw mr-3 text-pink-400"></i><span class="pb-1 md:pb-0 text-sm">Manage</span>
+					<li class="mr-6 my-2 md:my-0">
+                        <a href="http://localhost:3000/admin-dashboard/manage" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900  hover:border-blue-400">
+                            <i class="fas fa-tasks fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Manage</span>
                         </a>
                     </li>
                     <li class="mr-6 my-2 md:my-0">
-                      <a href="http://localhost:3000/admin-dashboard/add-product" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900  hover:border-yellow-400">
-                          <i class="fas fa-tasks fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Add Product</span>
-                      </a>
-                  </li>
+                        <a href="http://localhost:3000/admin-dashboard/add-product" class="block py-1 md:py-3 pl-1 align-middle text-gray-400 no-underline hover:text-gray-100 border-b-2 border-gray-900 hover:border-yellow-400">
+                            <i class="fas fa-tasks fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Add Product</span>
+                        </a>
+                    </li>
                     <li class="mr-6 my-2 md:my-0">
                         <a href="http://localhost:3000/admin-dashboard/messages" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900  hover:border-purple-400">
                             <i class="fa fa-envelope fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Messages</span>
                         </a>
                     </li>
                     <li class="mr-6 my-2 md:my-0">
-                      <a href="http://localhost:3000/admin-dashboard/stock" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900  hover:border-indigo-400">
-                          <i class="fa fa-envelope fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Stock</span>
-                      </a>
+                        <a href="http://localhost:3000/admin-dashboard/stock" class="block py-1 md:py-3 pl-1 align-middle text-indigo-400 no-underline hover:text-indigo-100 border-b-2 border-indigo-400  hover:border-indigo-400">
+                            <i class="fa fa-envelope fa-fw mr-3 text-indigo-400"></i><span class="pb-1 md:pb-0 text-sm">Stock</span>
+                        </a>
                     <li class="mr-6 my-2 md:my-0">
                         <a href="http://localhost:3000/admin-dashboard/orders" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900  hover:border-green-400">
                             <i class="fas fa-chart-area fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Orders</span>
@@ -124,16 +122,19 @@
                     <thead class="bg-gray-50">
                       <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Name
+                          Type
+                        </th>
+                        <!-- <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Title
+                        </th> -->
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Description
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Contact
+                          Price
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Status
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Role
+                          Quantity
                         </th>
                         <th scope="col" class="relative px-6 py-3">
                           <span class="sr-only">Edit</span>
@@ -144,40 +145,37 @@
                       </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        <% for (let i = 0; i < users_count; i++) { %> 
+                        <% for (let i = 0; i < products_count; i++) { %> 
                       <tr>
                         <td class="px-6 py-4 whitespace-nowrap">
                           <div class="flex items-center">
                             <div class="flex-shrink-0 h-10 w-10">
-                              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                              <img class="h-10 w-10 rounded-full" src="http://localhost:3000/uploads/<%= products[i]["image"] %> " alt="">
                             </div>
                             <div class="ml-4">
                               <div class="text-sm font-medium text-gray-900">
-                                <%= users[i]["name"] %> 
+                                <%= products[i]["type"] %> 
                               </div>
                               <div class="text-sm text-gray-500">
-                                <%= users[i]["address"] %> 
+                                <%= products[i]["title"] %> 
                               </div>
                             </div>
                           </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                          <div class="text-sm text-gray-900"><%= users[i]["email"] %></div>
-                          <div class="text-sm text-gray-500"><%= users[i]["mobile"] %></div>
+                          <div class="text-sm text-gray-900"><%= products[i]["description"] %></div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            Active
-                          </span>
+                            <div class="text-sm text-gray-900"><%= products[i]["price"] %></div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <%= users[i]["utype"] %> 
+                            <%= products[i]["quantity"] %> 
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <a href="http://localhost:3000/admin-dashboard/manage/edit-account/<%= users[i]["_id"] %>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                          <a href="http://localhost:3000/admin-dashboard/stock/edit-stock/<%= products[i]["_id"] %>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a href="http://localhost:3000/admin-dashboard/manage/delete-account/<%=users[i]["_id"]%>" class="text-indigo-600 hover:text-indigo-900"><i class="fas fa-trash"></i></a>
+                            <a href="http://localhost:3000/admin-dashboard/stock/delete-stock/<%=products[i]["_id"]%>" class="text-indigo-600 hover:text-indigo-900"><i class="fas fa-trash"></i></a>
                           </td>
                       </tr>
                       <% } %> 
@@ -190,56 +188,56 @@
           </div>
     </div>
     
-<script>
-	var userMenuDiv = document.getElementById("userMenu");
-	var userMenu = document.getElementById("userButton");
-	
-	var navMenuDiv = document.getElementById("nav-content");
-	var navMenu = document.getElementById("nav-toggle");
-	
-	document.onclick = check;
+    <script>
+        var userMenuDiv = document.getElementById("userMenu");
+        var userMenu = document.getElementById("userButton");
+        
+        var navMenuDiv = document.getElementById("nav-content");
+        var navMenu = document.getElementById("nav-toggle");
+        
+        document.onclick = check;
 
-	function check(e){
-	  var target = (e && e.target) || (event && event.srcElement);
+        function check(e){
+        var target = (e && e.target) || (event && event.srcElement);
 
-	  //User Menu
-	  if (!checkParent(target, userMenuDiv)) {
-		// click NOT on the menu
-		if (checkParent(target, userMenu)) {
-		  // click on the link
-		  if (userMenuDiv.classList.contains("invisible")) {
-			userMenuDiv.classList.remove("invisible");
-		  } else {userMenuDiv.classList.add("invisible");}
-		} else {
-		  // click both outside link and outside menu, hide menu
-		  userMenuDiv.classList.add("invisible");
-		}
-	  }
-	  
-	  //Nav Menu
-	  if (!checkParent(target, navMenuDiv)) {
-		// click NOT on the menu
-		if (checkParent(target, navMenu)) {
-		  // click on the link
-		  if (navMenuDiv.classList.contains("hidden")) {
-			navMenuDiv.classList.remove("hidden");
-		  } else {navMenuDiv.classList.add("hidden");}
-		} else {
-		  // click both outside link and outside menu, hide menu
-		  navMenuDiv.classList.add("hidden");
-		}
-	  }
-	  
-	}
+        //User Menu
+        if (!checkParent(target, userMenuDiv)) {
+            // click NOT on the menu
+            if (checkParent(target, userMenu)) {
+            // click on the link
+            if (userMenuDiv.classList.contains("invisible")) {
+                userMenuDiv.classList.remove("invisible");
+            } else {userMenuDiv.classList.add("invisible");}
+            } else {
+            // click both outside link and outside menu, hide menu
+            userMenuDiv.classList.add("invisible");
+            }
+        }
+        
+        //Nav Menu
+        if (!checkParent(target, navMenuDiv)) {
+            // click NOT on the menu
+            if (checkParent(target, navMenu)) {
+            // click on the link
+            if (navMenuDiv.classList.contains("hidden")) {
+                navMenuDiv.classList.remove("hidden");
+            } else {navMenuDiv.classList.add("hidden");}
+            } else {
+            // click both outside link and outside menu, hide menu
+            navMenuDiv.classList.add("hidden");
+            }
+        }
+        
+        }
 
-	function checkParent(t, elm) {
-	  while(t.parentNode) {
-		if( t == elm ) {return true;}
-		t = t.parentNode;
-	  }
-	  return false;
-	}
-</script>
+        function checkParent(t, elm) {
+        while(t.parentNode) {
+            if( t == elm ) {return true;}
+            t = t.parentNode;
+        }
+        return false;
+        }
+    </script>
 
-</body>
+    </body>
 </html>
