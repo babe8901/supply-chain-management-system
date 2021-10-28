@@ -841,7 +841,9 @@ app.get("/user-dashboard/review/:id",async(req,res)=>{
 app.get("/transporter",(req,res)=>{
   try{
     if(req.session.user && req.cookies.user_sid){
-        res.render("transporter");
+        res.render("transporter",{
+          user:user
+        });
     }
     else{
       res.redirect("/login");

@@ -41,6 +41,9 @@
                     <p> <%=user['name']%></p>
                     <p> <%=user['mobile']%></p>
                 </center> 
+                <%if(user['utype']=='user'){
+
+                %>
                 <ul id="ul">
                     
                     <li><a href="http://localhost:3000/profile?username=<%=user['email']%>"><i class="fas fa-users"></i>Profile</a></li>
@@ -50,6 +53,20 @@
                
                     <li id="logout"><a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i>logout</a></li>
                 </ul>
+                <%}else{
+                    %>
+                    <ul id="ul">
+                    
+                        <li><a href="http://localhost:3000/profile"><i class="fas fa-users"></i>Profile</a></li>
+                        <li><a href="http://localhost:3000/transaction_history"><i class="fas fa-history"></i>Task</a></li>
+                        <li><a href="http://localhost:3000/carts"><i class="fas fa-cart-plus"></i>Completed task</a></li>
+                      
+                        <li id="logout"><a href="http://localhost:3000/logout"><i class="fas fa-sign-out-alt"></i>logout</a></li>
+                    </ul>
+                    
+                 <%   
+                }%>
+                
               </div>
               <div class="content">
                 <div class="second" >
