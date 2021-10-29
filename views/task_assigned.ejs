@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Bar</title>
+    <link rel="stylesheet" href="task.css">
+    <link rel = "icon" href = 
+"../image/bd7da51c-5529-4aeb-8df4-a441cebc5abc.jpg" 
+        type = "image/x-icon">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+
+        <div class="container">
+            <div class="title">
+                  <h1>Task List and CheckList</h1>
+            </div>
+            <%if(task.length!=0){
+                %>
+
+            <div class="product-detail">
+                 <h1>Product detail</h1>
+                 <hr>
+                 <p>product:<span><%=product['product']%></span></p>
+                <p>Qunatity:<span><%=product['quantity']%></span></p>
+                <p>Ordered Date:<span><%=product['date']%></span></p>
+                <a href="http://localhost:3000/complete">Completed</a>
+            </div>
+            <div class="user-detail">
+                <h1>User Detail</h1>
+                <hr>
+                <p>Name:<span><%=user['name']%></span></p>
+                <p>Phone No:<span><%=user['mobile']%></span></p>
+                <p>Email  id:<span><%=user['email']%></span></p>
+                <p>Destination Address:<span><%=user['address']%></span></p>
+            </div>
+            
+            <%
+        }else{
+
+            %>
+            No task asssigned
+            <%
+        }
+        %>
+        </div>
+</body>
+</html>

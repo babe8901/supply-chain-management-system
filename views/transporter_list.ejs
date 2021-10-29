@@ -22,7 +22,8 @@
     </style>
 </head>
 <body class="bg-black-alt font-sans leading-normal tracking-normal">
- 
+
+
   <nav id="header" class="bg-gray-900 fixed w-full z-10 top-0 shadow">
 	
 
@@ -99,10 +100,10 @@
                     </a>
                 </li>
                 <li class="mr-6 my-2 md:my-0">
-                  <a href="http://localhost:3000/transporter_list" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900  hover:border-red-400">
-                      <i class="fa fa-wallet fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Transporter</span>
-                  </a>
-              </li>
+                    <a href="http://localhost:3000/transporter_list" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900  hover:border-red-400">
+                        <i class="fa fa-wallet fa-fw mr-3"></i><span class="pb-1 md:pb-0 text-sm">Transporter</span>
+                    </a>
+                </li>
             </ul>
             
             <div class="relative pull-right pl-4 pr-4 md:pr-0">
@@ -128,7 +129,7 @@
         </div>
       </div>
     </div> -->
- 
+
 <div class="container items-center w-full mx-auto pt-32 pl-10 pr-10">
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -137,123 +138,75 @@
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr>
-                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th style="text-align:center" scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Name
                     </th>
+                   
+                    
                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Product
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Amount
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Date
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      User delivery verify
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      transporter delivery verify
+                      Adddress
                     </th>
                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Status
                     </th>
-                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Assign Task
-                    </th>
-                    <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Delete</span>
-                    </th>
+                  
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <%for(let i=0;i<user.length;i++){
+                            %>
+                            <%
+                            if(user[i]['utype']=="transporter"){
+                          %>
+                            
+                      <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="flex items-center">
+                            <div class="flex-shrink-0 h-10 w-10">
+                              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                            </div>
+                            <div class="ml-4">
+                              <div class="text-sm text-center font-medium text-gray-900">
+                                <%=user[i]['name']%>
+                              </div>
+                              <div class="text-sm text-center text-gray-500">
+                                <%=user[i]['email']%>
+                              </div>
+                              <div class="text-sm text-center text-gray-500">
+                                <%=user[i]['mobile']%>
+                          
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                     
+                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                          <span class="px-2 inline-flex text-xl leading-5 font-semibold rounded-full">
+                           <%=user[i]['address']%> 
+                          </span>
+                        </td>
+                        <td class="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
+                            <%if(user[i]['busy']==0){
+                                %>
+                                <a  href="http://localhost:3000/assign_transporter/<%=user[i]['_id']%>">Free</a>
+                                <%
+                            }
+                            else{
+                                %>
+                                Not free
+                                <%
+                            }
+                            %>
+                          
+                        </td>
+                      
+                        
+                       
+                      </tr>
+                      <%}%>
+                      <% } %>
+                    </tbody>
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <% for (let i = 0; i < orders_count; i++) { %> 
-                  <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10">
-                          <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
-                        </div>
-                        <div class="ml-4">
-                          <div class="text-sm text-center font-medium text-gray-900">
-                            <%= orders[i]["user"] %> 
-                          </div>
-                          <div class="text-sm text-center text-gray-500">
-                            <%= orders[i]["userid"] %> 
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <div class="text-sm text-center text-gray-900"><%= orders[i]["product"] %></div>
-                    </td>
-                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xl leading-5 font-semibold rounded-full">
-                        <%= orders[i]["price"] %> X <%= orders[i]["quantity"] %> = <%= orders[i]["amount"] %> 
-                      </span>
-                    </td>
-                    <td class="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
-                        <%= orders[i]["date"] %> 
-                    </td>
-                    <td class="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
-                      
-                      <%if(orders[i]['gotDelivery']==0){
-                        %>
-                        No
-                        <%
-                      }else{
-                        %>
-                          yes
-                        <%
-                      }
-                      %>
-                     
-                  </td>
-                  <td class="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
-                      
-                    <%if(orders[i]['transporterVerification']==0){
-                      %>
-                      No
-                      <%
-                    }else{
-                      %>
-                        yes
-                      <%
-                    }
-                    %>
-                   
-                </td>
-                    <td class="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
-                        <% if (orders[i]["status"] == "done" ) { %> 
-                            <i class="fas fa-check-circle text-green-600"></i>
-                        <% } else if (orders[i]["status"] == "pending") { %> 
-                            <button type="button" onmouseenter="openPopover(event,'tooltip-example')" onmouseleave="openPopover(event,'tooltip-example')">
-                                <a href="http://localhost:3000/admin-dashboard/orders/order-completed/<%=orders[i]['_id']%>" class="text-gray-600 hover:text-green-600"><i class="fas fa-check-circle"></i></i></a>
-                            </button>
-                        <% } else { %>
-                            <%= orders[i]["status"] %>
-                        <% } %>  
-                    </td>
-                    <td class="px-6 text-center py-4 whitespace-nowrap text-sm text-gray-500">
-                      <%
-                      if(orders[i]['transporterAssigned']==1){
-                        %>
-                        Assigned
-                        <%
-                      }else{
-                        %>
-                        <a href="http://localhost:3000/transporter_list/<%=orders[i]['_id']%>">Assign</a>
-                        <%
-                      }
-                      %>
-                   
-                  </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="http://localhost:3000/admin-dashboard/orders/delete-order/<%=orders[i]["_id"]%>" class="text-gray-600 hover:text-red-500"><i class="fas fa-trash"></i></a>
-                    </td>
-                  </tr>
-                  <% } %>
-                </tbody>
+               
               </table>
             </div>
           </div>

@@ -1,9 +1,6 @@
 
 const mongoose=require("mongoose");
-
-const username = "user";
-const password = "user";
-var url = `mongodb+srv://${username}:${password}@nodejsapp.h5ec5.mongodb.net/supplyChainManagement?retryWrites=true&w=majority`;
+var url = "mongodb://localhost:27017/supplyChainManagement";
 
 mongoose.connect(url,{useNewUrlParser:true,useUnifiedTopology:true})
 .then(()=>console.log("Connected to database.."))
@@ -17,7 +14,11 @@ const userData=new mongoose.Schema({
     "password":String,
     "utype":String,
     "gender":String,
-    "address":String
+    "address":String,
+    "busy":{
+        type:Number,
+        default:0
+    }
 },{collection:"userData"});
 
 const userModel=mongoose.model("userData",userData);
@@ -70,6 +71,22 @@ const ordered_product=new mongoose.Schema({
     "date":{
         type:Date,
         default:Date.now
+    },
+    "gotDelivery":{
+        type:Number,
+        default:0
+    },
+    "transporterVerification":{
+       type:Number,
+       default:0  
+    },
+    "transporterAssigned":{
+        type:Number,
+        default:0
+    },
+    "assignedTransporterId":{
+        type:String,
+        default:null
     },
     "status":String
 
@@ -130,3 +147,26 @@ const feedback=new mongoose.Schema({
 
 const feedbackModel=mongoose.model("feedback",feedback)
 module.exports.feedbackModel=feedbackModel
+
+//------------------------------------------------ TASK ASSIGNED ------------------------------
+const task=new mongoose.Schema({
+    "user":String,
+    "product_id":String,
+    "username":String
+},{collection:"task_assigned"})
+
+const taskModel=mongoose.model("task_assigned",task)
+module.exports.taskModel=taskModel;
+
+const completed_task=new mongoose.Schema({
+  
+    "product_id":String,
+    "username":String,
+    "date":{
+        type:Date,
+        default:Date.now
+    }
+},{collection:"completed_task"})
+
+const completedTaskModel=mongoose.model("completed_task",completed_task)
+module.exports.completedTaskModel=completedTaskModel;

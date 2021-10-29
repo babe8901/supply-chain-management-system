@@ -1,0 +1,67 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    font-family: "MontserratBold",Helvetica,Arial,sans-serif;
+}
+.container{
+
+    height: 100vh;
+    
+}
+.container .title{
+    width: 100%;
+    margin: 60px 10px;
+   
+
+    padding: 20p 20px;
+}
+.title h1{
+    text-align: center;
+    font-size: 45px;
+    color: rgb(48, 44, 44);
+}
+.container .user-detail{
+    width: 50%;
+
+    float:left;
+    padding: 40px 50px;
+}
+.container .user-detail h1{
+    padding: 10px 0px;
+}
+.container .product-detail{
+    width: 50%;
+
+    float: left;
+    padding: 40px 80px;
+    
+}
+.container .product-detail h1{
+    padding: 10px 0px;
+}
+p{
+    font-weight: bold;
+}
+a{
+    text-align: center;
+    border:3px solid blue;
+    padding: 9px 30px;
+    text-decoration: none;
+    border: none;
+   background-color: red;
+    position: relative;
+    top: 15px;
+}
+span{
+    font-weight: lighter;
+}
+a:hover{
+    border: 1px solid red;
+    background-color: white;
+  
+    color: red;
+    cursor: pointer;
+}
