@@ -58,6 +58,7 @@
                                   <th>Delivery Address</th>
                                   <th>Date of order</th>
                                   <th>Delivery Status</th>
+                                  <th>Got Delivery?</th>
                         
                               </tr>
                               <% for(let i=0;i<ordered_product.length;i++){
@@ -69,7 +70,31 @@
                                 <td><%=ordered_product[i]['amount']%></td>
                                 <td><%=ordered_product[i]['address']%></td>
                                 <td><%=ordered_product[i]['date']%></td>
-                                <td><%=ordered_product[i]['status']%></td>
+                                
+
+                                <td>
+                                    <%if(ordered_product[i]['gotDelivery']==0){
+                                        %>
+                                        <%=ordered_product[i]['status']%></td>
+                                        <%
+                                    }else{
+                                        %>
+                                        Completed
+                                        <%
+                                    }
+                                        %>
+                                    
+                                <td>
+                                <%if(ordered_product[i]['gotDelivery']==0){
+                                    %>
+                                      <a href="http://localhost:3000/gotDelivery/<%=ordered_product[i]['_id']%>">click if yes</a>
+                                    <%
+                                }else{
+                                    %>
+                                      Yes
+                                    <%
+                                }
+                                %></td>
                             
                             </tr>
                             <%}%>

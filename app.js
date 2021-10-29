@@ -21,7 +21,8 @@ const accountModel=require("./database_module.js").accountModel;
 const cartModel=require("./database_module.js").cartModel;
 const messageModel = require("./database_module.js").messageModel;
 const feedbackModel=require("./database_module.js").feedbackModel;
-
+const taskModel=require("./database_module.js").taskModel;
+const completedTaskModel=require("./database_module.js").completedTaskModel;
 
 
 const { ObjectId } = require("bson");
@@ -36,6 +37,8 @@ var product=""
 var buy_new_product=""
 var temp1=""
 var temp2=""
+var assigned_product_id=""
+
 
 var fs = require('fs');
 const { title } = require("process");
@@ -51,7 +54,7 @@ app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"css")))
 app.use(express.static(path.join(__dirname,"js")));
 app.use(express.static(path.join(__dirname,"image")))
-app.use("/upload", express.static(path.join(__dirname, "uploads")))
+app.use(express.static(path.join(__dirname,"uploads")))
 app.use(bodyParser(urlencoded({extended:true})))
 
 // set morgan to log info about our requests for development use.
@@ -110,7 +113,7 @@ var upload = multer({ storage: storage })
 
 
 app.use(express.static(__dirname + '/public'));
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('image'));
 
 //----------------------------------------------------------ROUTE FOR HOME PPAGE------------------------------------------------------------
 app.get("/", sessionChecker, (req, res) => {
@@ -167,7 +170,7 @@ app
 
     console.log(username,password)
       try {
-        user = await userModel.findOne({ email: username }).exec();
+        user = await userModel.findOne({ email: username}).exec();
         console.log(user,"login")
         
         if(!user) {
@@ -1066,6 +1069,152 @@ app.get("/transporter",(req,res)=>{
    
   }catch(err){
     console.log(err);
+  }
+})
+app.get("/transporter_list/:product_id",async(req,res)=>{
+  try{
+      if(req.session.user && req.cookies.user_sid){
+        assigned_product_id=req.params.product_id
+        const user=await userModel.find().exec();
+        res.render("transporter_list",{
+          user:user,
+          product_id:assigned_product_id
+        })
+      }
+      else{
+        res.render("/login")
+      }
+  }catch(err){
+    cconsole.log(err)
+  }
+})
+app.get("/assign_transporter/:user_id",async(req,res)=>{
+  try{
+     if(req.session.user && req.cookies.user_sid){
+        const user_id=req.params.user_id
+        const data=await userModel.findOne({_id:user_id}).exec();
+        const newRecord=new taskModel({
+          "user":user_id,
+          "product_id":assigned_product_id,
+          "username":data['email']
+        })
+        newRecord.save((err,doc)=>{
+          if(err){
+            res.send(err)
+          }
+          
+          
+        })
+        await orderedModel.findOneAndUpdate({_id:assigned_product_id},{
+          $set:{
+            "transporterAssigned":1,
+            "assignedTransporterId":user_id
+          }
+        })
+        await userModel.findOneAndUpdate({_id:user_id},{
+          $set:{
+            "busy":1
+          }
+        })
+        res.redirect("/admin-dashboard/orders")
+        
+     }else{
+       res.redirect("/login")
+     }
+  }catch(err){
+    console.log(err)
+  }
+})
+//----------------------------------------------------- ROUTE FOR TASKK ASSIGNED --------------
+app.get("/task_assigned",async(req,res)=>{
+  try{
+    if(req.session.user && req.cookies.user_sid){
+   
+      var task=await taskModel.findOne({username:username}).exec();
+      console.log(task)
+      if(task){
+        console.log(task['product_id'])
+        console.log(task['user'])
+        var product=await orderedModel.findOne({_id:task['product_id']}).exec()
+        var user_detail=await userModel.findOne({email:task['user']}).exec();
+        console.log(user_detail)
+        res.render("task_assigned",{
+          task:task,
+          product:product,
+          user:user
+        })
+        res.send(user_detail)
+      }
+      else{
+        res.send("No task assigned")
+      }
+    }
+  }catch(err){
+    console.log(err)
+  }
+})
+
+app.get("/completed_task",(req,res)=>{
+  try{
+     if(req.session.user && user.cookie.user_sid){
+        res.send("Hello Completed Task..")
+     }
+     else{
+       req.redirect("/login")
+     }
+  }catch(err){
+    console.log(err)
+  }
+})
+
+app.get("/complete",async(req,res)=>{
+  try{
+    if(req.session.user && req.cookies.user_sid){
+        await userModel.findOneAndUpdate({email:username},{
+          $set:{
+            "busy":0
+          }
+        })
+
+        await taskModel.deleteOne({username:username})
+        const newRecord=new completedTaskModel({
+          "username":username,
+          "product_id":assigned_product_id
+        })
+        newRecord.save();
+        await orderedModel.findOneAndUpdate({_id:assigned_product_id},{
+          $set:{
+            "transporterVerification":1
+          }
+        })
+        res.send("Task Completed..")
+     }
+     else{
+       req.redirect("/login")
+     }
+  }catch(err){
+    console.log(err)
+  }
+})
+
+app.get("/gotDelivery/:id",async(req,res)=>{
+  try{
+    if(req.session.user && req.cookies.user_sid){
+      
+      const id=req.params.id;
+      await orderedModel.findOneAndUpdate({_id:id},{
+        $set:{
+          gotDelivery:1
+        }
+      }).then(result=>{
+        res.redirect("/ordered_product")
+      })
+      res.send(id)
+    }
+
+  }
+  catch(err){
+    console.log(err)
   }
 })
   // route for handling 404 requests(unavailable routes)
