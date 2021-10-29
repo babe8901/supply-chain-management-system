@@ -51,6 +51,7 @@ app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"css")))
 app.use(express.static(path.join(__dirname,"js")));
 app.use(express.static(path.join(__dirname,"image")))
+app.use("/upload", express.static(path.join(__dirname, "uploads")))
 app.use(bodyParser(urlencoded({extended:true})))
 
 // set morgan to log info about our requests for development use.
