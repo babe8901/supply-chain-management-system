@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/2326db00-dca9-4405-a0de-7fec2cdcf6a5/microsoft.web/sites/subscriptions/2326db00-dca9-4405-a0de-7fec2cdcf6a5/resourceGroups/agrian/providers/Microsoft.Web/sites/SCMS8901",
+    "appService.deploySubpath": "."
+}
